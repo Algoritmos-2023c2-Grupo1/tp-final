@@ -9,4 +9,10 @@ add_executable(tp_final
         src/Aeropuerto.cpp
         src/Aeropuerto.h
         src/Vuelo.h
-        src/Vuelo.cpp)
+        src/Vuelo.cpp
+        src/Lista.cpp
+        src/LectorArchivos.h
+        src/Lista.h
+        src/LectorArchivos.cpp
+        src/main.cpp
+)
