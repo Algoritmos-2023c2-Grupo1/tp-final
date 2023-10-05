@@ -1,0 +1,7 @@
+EZE Ministro-Pistarini Ezeiza Argentina 34.75 4 12 46
+LAX Aeropuerto-Internacional-de-los-Angeles Los-Angeles EEUU 14 9 87 69
+JFK Aeropuerto-John-F.-Kennedy Nueva-York EEUU 24 6 59 89
+CDG Aeropuerto-Charles-de-Gaulle París Francia 32 3 71 101
+DXB Aeropuerto-Internacional-de-Dubái Dubái Emiratos-Árabes-Unidos 18 2 52 78
+ICN Aeropuerto-Internacional-de-Incheon Incheon Corea-del-Sur 20 4 43 67
+SYD Aeropuerto-Kingsford-Smith Sídney Australia 16 3 48 73

@@ -97,10 +97,16 @@ La entrega final del trabajo será en horario de clases, momento en el que se ha
 ---
 title: UML - Aplicación para el manejo de aeropuertos y vuelos
 ---
+
 classDiagram
     class Grafo~tipo~ {
 
     }
+    
+    class Lista~tipo~ {
+
+    }
+
     class Aeropuerto {
         +String codigo_IATA 
         +String nombre 
@@ -111,16 +117,59 @@ classDiagram
         +int destinos_nacionales 
         +int destinos_internacionales
     }
+
     class Vuelo {
         +String codigo_IATA_partida 
         +String código_IATA_destino 
         +int costo_vuelo 
         +float horas_vuelo
     }
-    class Lista~tipo~ {
-
+    
+    class GrafoAeropuertos {
+        +agregarAeropuerto(aeropuerto: Aeropuerto): void
+        +eliminarAeropuerto(codigo_IATA: String): void
+        +obtenerAeropuerto(codigo_IATA: String): Aeropuerto
+        +listarAeropuertosPorCodigoIATA(): Lista<Aeropuerto>
     }
-    class OpcionMenu {
 
+    class GrafoVuelos {
+        +agregarVuelo(vuelo: Vuelo): void
+        +obtenerVuelosDesdeHasta(codigo_IATA_partida: String, codigo_IATA_destino: String): Lista<Vuelo>
     }
+    
+    class MenuPrincipal {
+        +obtenerInfoAeropuerto(): void
+        +crearAeropuerto(): void
+        +eliminarAeropuerto(): void
+        +listarAeropuertosPorCodigoIATA(): void
+        +buscarRutaMasEconomica(): void
+        +buscarRutaMasRapida(): void
+    }
+    
+    class Aplicacion {
+        -grafoAeropuertos: GrafoAeropuertos
+        -grafoVuelos: GrafoVuelos
+        -menuPrincipal: MenuPrincipal
+        +iniciar(): void
+    }
+    
+    class LectorArchivos {
+        +obtenerAereopuertosDesdeArchivo(nombreArchivo: String): Lista<Aeropuerto>
+        +obtenerVuelosDesdeArchivo(nombreArchivo: String): Lista<Vuelo>
+    }
+
+    Aplicacion --|> GrafoAeropuertos
+    Aplicacion --|> GrafoVuelos
+    Aplicacion --|> MenuPrincipal
+		
+    Aeropuerto --|> LectorArchivos
+    Aeropuerto --|> GrafoAeropuertos
+    
+    GrafoAeropuertos --|> MenuPrincipal
+    GrafoVuelos --|> MenuPrincipal
+    Vuelo --|> LectorArchivos
+    Vuelo --|> GrafoVuelos
+
+    Grafo --|> GrafoVuelos
+    Grafo --|> GrafoAeropuertos
 ```
