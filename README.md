@@ -90,3 +90,37 @@ métodos.
 
 Semanalmente cada equipo deberá realizar una exposición del avance del proyecto.
 La entrega final del trabajo será en horario de clases, momento en el que se hará la defensa del mismo. Por defensa se entiende la muestra del trabajo junto con una explicación por parte de cada uno de los integrantes.
+
+## Diseño UML
+
+```mermaid
+---
+title: UML - Aplicación para el manejo de aeropuertos y vuelos
+---
+classDiagram
+    class Grafo~tipo~ {
+
+    }
+    class Aeropuerto {
+        +String codigo_IATA 
+        +String nombre 
+        +String ciudad 
+        +String pais 
+        float superficie 
+        +int cantidad_terminales 
+        +int destinos_nacionales 
+        +int destinos_internacionales
+    }
+    class Vuelo {
+        +String codigo_IATA_partida 
+        +String código_IATA_destino 
+        +int costo_vuelo 
+        +float horas_vuelo
+    }
+    class Lista~tipo~ {
+
+    }
+    class OpcionMenu {
+
+    }
+```
