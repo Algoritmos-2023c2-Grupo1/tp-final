@@ -1,14 +1,9 @@
-//
-// Created by ttoloza on 05/10/2023.
-//
-
 #ifndef TP_FINAL_LECTORARCHIVOS_H
 #define TP_FINAL_LECTORARCHIVOS_H
 
 #include <string>
 #include "Aeropuerto.h"
 #include "Vuelo.h"
-#include "Lista.h"
 
 using namespace std;
 

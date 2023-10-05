@@ -58,7 +58,6 @@ vector<Vuelo> LectorArchivos::obtenerVuelosDesdeArchivo() {
 
         ss >> codigoIATAPartida >> codigoIATADestino >> costoVuelo >> horasVuelo;
 
-        // Crea un objeto Vuelo utilizando el nuevo constructor
         Vuelo vuelo(codigoIATAPartida, codigoIATADestino, costoVuelo, horasVuelo);
 
         vuelos.push_back(vuelo);
