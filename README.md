@@ -108,21 +108,33 @@ classDiagram
     }
 
     class Aeropuerto {
-        +String codigo_IATA 
-        +String nombre 
-        +String ciudad 
-        +String pais 
-        float superficie 
-        +int cantidad_terminales 
-        +int destinos_nacionales 
-        +int destinos_internacionales
+        -string codigo_IATA 
+        -string nombre 
+        -string ciudad 
+        -string pais 
+        -float superficie 
+        -int cantidad_terminales 
+        -int destinos_nacionales 
+        -int destinos_internacionales
+        +getCodigo_IATA(): string
+        +getNombre(): string
+        +getCiudad(): string
+        +getPais(): string
+        +getSuperficie(): float
+        +getCantidad_terminales(): int
+        +getDestinos_nacionales(): int
+        +getDestinos_internacionales(): int
     }
 
     class Vuelo {
-        +String codigo_IATA_partida 
-        +String código_IATA_destino 
-        +int costo_vuelo 
-        +float horas_vuelo
+        -string codigo_IATA_partida 
+        -string código_IATA_destino 
+        -int costo_vuelo 
+        -float horas_vuelo
+        +getCodigoIATAPartida() : string 
+        +getCodigoIATADestino() : string 
+        +getCostoVuelo() : int 
+        +getHorasVuelo() : float
     }
     
     class GrafoAeropuertos {
