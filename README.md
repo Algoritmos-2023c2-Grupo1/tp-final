@@ -104,7 +104,24 @@ classDiagram
     }
     
     class Lista~tipo~ {
+	-Nodo~tipo~* primero
+        -int largo
+        -getNodo(pos : int) Nodo~tipo~*
+        +alta(nodo : Nodo~tipo~, pos : int)
+        +baja(pos : int)
+        +consulta(pos : int) ~tipo~*
+        +vacia() bool
+        +getLargo() int
+        +mostrar()
+    }
 
+    class Nodo~tipo~ {
+        -~tipo~ dato
+        -Nodo* siguiente
+        +setDato(dato : ~tipo~)
+        +getDato() ~tipo~*
+        +setSiguiente(siguiente : Nodo*)
+        +getSiguiente() Nodo*
     }
 
     class Aeropuerto {
@@ -169,6 +186,8 @@ classDiagram
         +obtenerAereopuertosDesdeArchivo(nombreArchivo: String): Lista<Aeropuerto>
         +obtenerVuelosDesdeArchivo(nombreArchivo: String): Lista<Vuelo>
     }
+
+    Nodo~tipo~ --> Lista~tipo~
 
     Aplicacion --|> GrafoAeropuertos
     Aplicacion --|> GrafoVuelos
