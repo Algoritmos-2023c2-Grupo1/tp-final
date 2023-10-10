@@ -99,10 +99,16 @@ title: UML - Aplicación para el manejo de aeropuertos y vuelos
 ---
 
 classDiagram
-    class Grafo~tipo~ {
 
+    class Nodo~tipo~ {
+        -~tipo~ dato
+        -Nodo* siguiente
+        +setDato(dato : ~tipo~)
+        +getDato() ~tipo~*
+        +setSiguiente(siguiente : Nodo*)
+        +getSiguiente() Nodo*
     }
-    
+
     class Lista~tipo~ {
 	-Nodo~tipo~* primero
         -int largo
@@ -115,15 +121,19 @@ classDiagram
         +mostrar()
     }
 
-    class Nodo~tipo~ {
-        -~tipo~ dato
-        -Nodo* siguiente
-        +setDato(dato : ~tipo~)
-        +getDato() ~tipo~*
-        +setSiguiente(siguiente : Nodo*)
-        +getSiguiente() Nodo*
+    class Hash~tipo~ {
+        -int tamanio
+        -Lista~tipo~ *tabla
+        -funcionHash(key :int) int
+        +setDato(key :int, dato : ~tipo~)
+        +getDato(key : int)
+        +borrar(key :int)
     }
 
+    class Grafo~tipo~ {
+
+    }
+    
     class Aeropuerto {
         -string codigo_IATA 
         -string nombre 
@@ -154,7 +164,7 @@ classDiagram
         +getHorasVuelo() : float
     }
     
-    class GrafoAeropuertos {
+    class HashAeropuertos {
         +agregarAeropuerto(aeropuerto: Aeropuerto): void
         +eliminarAeropuerto(codigo_IATA: String): void
         +obtenerAeropuerto(codigo_IATA: String): Aeropuerto
@@ -188,19 +198,25 @@ classDiagram
     }
 
     Nodo~tipo~ --> Lista~tipo~
+    Lista~tipo~ --> Hash~tipo~
 
-    Aplicacion --|> GrafoAeropuertos
+    Aplicacion --|> HashAeropuertos
     Aplicacion --|> GrafoVuelos
     Aplicacion --|> MenuPrincipal
 		
     Aeropuerto --|> LectorArchivos
-    Aeropuerto --|> GrafoAeropuertos
+    Aeropuerto --|> HashAeropuertos
     
-    GrafoAeropuertos --|> MenuPrincipal
+    HashAeropuertos --|> MenuPrincipal
+
     GrafoVuelos --|> MenuPrincipal
+
     Vuelo --|> LectorArchivos
     Vuelo --|> GrafoVuelos
 
+    Hash~tipo~ --|> HashAeropuertos
+
     Grafo --|> GrafoVuelos
-    Grafo --|> GrafoAeropuertos
+
+    
 ```
