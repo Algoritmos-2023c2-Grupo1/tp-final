@@ -5,3 +5,11 @@ CDG Aeropuerto-Charles-de-Gaulle París Francia 32 3 71 101
 DXB Aeropuerto-Internacional-de-Dubái Dubái Emiratos-Árabes-Unidos 18 2 52 78
 ICN Aeropuerto-Internacional-de-Incheon Incheon Corea-del-Sur 20 4 43 67
 SYD Aeropuerto-Kingsford-Smith Sídney Australia 16 3 48 73
+JNB Aeropuerto-O.R.-Tambo Johannesburgo Sudáfrica 18.4 6 23 53
+ORD Aeropuerto-Internacional-de-Chicago-O'Hare Chicago EEUU 25.5 4 62 85
+PEK Aeropuerto-Internacional-de-Pekín Pekín China 23.8 3 62 94
+AMS Aeropuerto-Schiphol Ámsterdam Países-Bajos 27 6 91 173
+HKG Aeropuerto-Internacional-de-Hong-Kong Hong-Kong China 12.4 2 49 117
+MEX Aeropuerto-Benito-Juárez Ciudad-de-México México 13.3 2 59 80
+LHR Aeropuerto-Heathrow Londres Reino-Unido 12.27 4 81 161
+SFO Aeropuerto-Internacional-de-San-Francisco San-Francisco EEUU 20 4 65 102
