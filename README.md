@@ -97,30 +97,126 @@ La entrega final del trabajo será en horario de clases, momento en el que se ha
 ---
 title: UML - Aplicación para el manejo de aeropuertos y vuelos
 ---
+
 classDiagram
+
+    class Nodo~tipo~ {
+        -~tipo~ dato
+        -Nodo* siguiente
+        +setDato(dato : ~tipo~)
+        +getDato() ~tipo~*
+        +setSiguiente(siguiente : Nodo*)
+        +getSiguiente() Nodo*
+    }
+
+    class Lista~tipo~ {
+	-Nodo~tipo~* primero
+        -int largo
+        -getNodo(pos : int) Nodo~tipo~*
+        +alta(nodo : Nodo~tipo~, pos : int)
+        +baja(pos : int)
+        +consulta(pos : int) ~tipo~*
+        +vacia() bool
+        +getLargo() int
+        +mostrar()
+    }
+
+    class Hash~tipo~ {
+        -int tamanio
+        -Lista~tipo~ *tabla
+        -funcionHash(key :int) int
+        +setDato(key :int, dato : ~tipo~)
+        +getDato(key : int)
+        +borrar(key :int)
+    }
+
     class Grafo~tipo~ {
 
     }
+    
     class Aeropuerto {
-        +String codigo_IATA 
-        +String nombre 
-        +String ciudad 
-        +String pais 
-        float superficie 
-        +int cantidad_terminales 
-        +int destinos_nacionales 
-        +int destinos_internacionales
+        -string codigo_IATA 
+        -string nombre 
+        -string ciudad 
+        -string pais 
+        -float superficie 
+        -int cantidad_terminales 
+        -int destinos_nacionales 
+        -int destinos_internacionales
+        +getCodigo_IATA(): string
+        +getNombre(): string
+        +getCiudad(): string
+        +getPais(): string
+        +getSuperficie(): float
+        +getCantidad_terminales(): int
+        +getDestinos_nacionales(): int
+        +getDestinos_internacionales(): int
     }
+
     class Vuelo {
-        +String codigo_IATA_partida 
-        +String código_IATA_destino 
-        +int costo_vuelo 
-        +float horas_vuelo
+        -string codigo_IATA_partida 
+        -string código_IATA_destino 
+        -int costo_vuelo 
+        -float horas_vuelo
+        +getCodigoIATAPartida() : string 
+        +getCodigoIATADestino() : string 
+        +getCostoVuelo() : int 
+        +getHorasVuelo() : float
     }
-    class Lista~tipo~ {
+    
+    class HashAeropuertos {
+        +agregarAeropuerto(aeropuerto: Aeropuerto): void
+        +eliminarAeropuerto(codigo_IATA: String): void
+        +obtenerAeropuerto(codigo_IATA: String): Aeropuerto
+        +listarAeropuertosPorCodigoIATA(): Lista<Aeropuerto>
+    }
 
+    class GrafoVuelos {
+        +agregarVuelo(vuelo: Vuelo): void
+        +obtenerVuelosDesdeHasta(codigo_IATA_partida: String, codigo_IATA_destino: String): Lista<Vuelo>
     }
-    class OpcionMenu {
+    
+    class MenuPrincipal {
+        +obtenerInfoAeropuerto(): void
+        +crearAeropuerto(): void
+        +eliminarAeropuerto(): void
+        +listarAeropuertosPorCodigoIATA(): void
+        +buscarRutaMasEconomica(): void
+        +buscarRutaMasRapida(): void
+    }
+    
+    class Aplicacion {
+        -grafoAeropuertos: GrafoAeropuertos
+        -grafoVuelos: GrafoVuelos
+        -menuPrincipal: MenuPrincipal
+        +iniciar(): void
+    }
+    
+    class LectorArchivos {
+        +obtenerAereopuertosDesdeArchivo(nombreArchivo: String): Lista<Aeropuerto>
+        +obtenerVuelosDesdeArchivo(nombreArchivo: String): Lista<Vuelo>
+    }
 
-    }
+    Nodo~tipo~ --> Lista~tipo~
+    Lista~tipo~ --> Hash~tipo~
+
+    Aplicacion --|> HashAeropuertos
+    Aplicacion --|> GrafoVuelos
+    Aplicacion --|> MenuPrincipal
+		
+    Aeropuerto --|> LectorArchivos
+    Aeropuerto --|> HashAeropuertos
+    
+    HashAeropuertos --|> MenuPrincipal
+
+    GrafoVuelos --|> MenuPrincipal
+
+    Vuelo --|> LectorArchivos
+    Vuelo --|> GrafoVuelos
+
+    Hash~tipo~ --|> HashAeropuertos
+
+    Grafo --|> GrafoVuelos
+
+    
 ```
