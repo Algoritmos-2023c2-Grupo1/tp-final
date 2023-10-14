@@ -220,3 +220,11 @@ classDiagram
 
     
 ```
+## Datos de prueba
+Para el desarrollo de la aplicación se utiliza los archivos de `aeropuertos.txt` y `vuelos.txt` que generan los siguientes grafos dirigidos y pesados según `horas_vuelo` o `costo_vuelo` respectivamente.
+
+### Grafo de vuelos por horas de vuelo
+![Grafo pesado y dirigido por horas de vuelos](graph-vuelos-tiempo.png?raw=true "Grafo de vuelos por horas de vuelo")
+
+### Grafo de vuelos por costo de vuelo
+![Grafo pesado y dirigido por costo de vuelo](graph-vuelos-costo.png?raw=true "Grafo de vuelos por costo de vuelo")
