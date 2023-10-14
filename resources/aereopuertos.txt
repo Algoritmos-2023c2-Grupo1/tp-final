@@ -1,13 +1,13 @@
 EZE Ministro-Pistarini Ezeiza Argentina 34.75 4 12 46
 LAX Aeropuerto-Internacional-de-los-Angeles Los-Angeles EEUU 14.0 9 87 69
 JFK Aeropuerto-John-F.-Kennedy Nueva-York EEUU 24.0 6 59 89
-CDG Aeropuerto-Charles-de-Gaulle París Francia 32.2 3 71 101
-DXB Aeropuerto-Internacional-de-Dubái Dubái Emiratos-Árabes-Unidos 18.6 2 52 78
+CDG Aeropuerto-Charles-de-Gaulle Paris Francia 32.2 3 71 101
+DXB Aeropuerto-Internacional-de-Dubai Dubai Emiratos-Arabes-Unidos 18.6 2 52 78
 ICN Aeropuerto-Internacional-de-Incheon Incheon Corea-del-Sur 20.8 4 43 67
 SYD Aeropuerto-Kingsford-Smith Sydney Australia 16.6 3 48 73
 MIA Aeropuerto-Internacional-de-Miami Miami EEUU 12.5 6 34 8
 FCO Aeropuerto-de-Roma-Fiumicino Roma Italia 23.8 4 5 15
-BER Aeropuerto-de-Berlín-Brandeburgo Berlin Alemania 45.5 4 6 32
+BER Aeropuerto-de-Berlin-Brandeburgo Berlin Alemania 45.5 4 6 32
 LHR Aeropuerto-Internacional-de-Londres-Heathrow Londres Reino Unido 75.2 5 4 23
 NRT Aeropuerto-Internacional-de-Narita-Jasiko Tokio Japon 12.8 4 8 15
 IST Aeropuerto-de-Estambul Estambul Turquia 32.5 6 2 45
