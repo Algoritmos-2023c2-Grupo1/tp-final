@@ -53,7 +53,7 @@ public:
         tabla[i] = *item;    
     }
     
-    Lista<T>* getItem(int i) 
+    T* getItem(int i) 
     {
         return &tabla[i];    
     }
