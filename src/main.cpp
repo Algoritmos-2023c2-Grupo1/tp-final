@@ -139,7 +139,7 @@ public:
 int main() {
     Graph *lista = new Graph();
 
-    ifstream file1("aeropuertos.txt");
+    ifstream file1("../resources/aeropuertos.txt");
     string iata;
     string nombre;
     string ciudad;
@@ -158,7 +158,7 @@ int main() {
     
     file1.close();
 
-    ifstream file2("vuelos.txt");
+    ifstream file2("../resources/vuelos.txt");
     
 	string origen;
 	string destino;
