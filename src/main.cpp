@@ -1,11 +1,13 @@
 #include <iostream>
+#include <iterator>
+#include<fstream>
 #include <string>
 #include <list>
 
 using namespace std;
 
-class Node;
 class Edge;
+class Node;
 
 class Node {
 private:
@@ -23,13 +25,27 @@ public:
     
     list<Edge>* getVuelos() { return vuelos; }
     
-    void addEdge(Edge &edge) {
+    void addVuelo(Edge &edge) {
         vuelos->push_back(edge);
     }
     
     string toString() {
-        return "\n \tNode [iata=" + iata + ", vuelos=" + "]";
+        return "\n \tNode [iata=" + iata + ", vuelos=" + showlist() + "]";
     }
+
+    string showlist()
+    {
+        string output = "";
+        
+/*
+        list<Edge>::iterator it;
+        for (it = vuelos->begin(); it != vuelos->end(); ++it)
+            string txt = it->toString();
+            output += '\t' + txt + "\t";
+*/
+        return to_string(vuelos->size());
+    }
+
 };
 
 class Edge {
@@ -86,14 +102,96 @@ public:
                    ", tiempo=" + to_string(tiempo_vuelo) +
                    ", costo=" + to_string(costo_vuelo) + "]";
     }
+};
+
+class Graph {
+private:
+    list<Node>* nodes;
+
+public:
+    Graph() {
+        nodes = new list<Node>();
+    }
+    void addAeropuerto(Node &node) {
+        nodes->push_back(node);
+    }
+
+    list<Node>* getNodes() {
+        return nodes;
+    }
+
+    string toString() {
+        return "Graph [nodes=" + to_string(nodes->size()) + "]";
+    }
+
+    void addVueloANodo(string iata, Edge vuelo) {
+        list<Node>::iterator it;
+        for (it = nodes->begin(); it != nodes->end(); ++it)
+        {
+            if (it->getIATA() == iata)
+                it->addVuelo(vuelo);
+        }
+    }
+
+    void showlist()
+    {
+        list<Node>::iterator it;
+        for (it = nodes->begin(); it != nodes->end(); ++it)
+            cout << '\t' << it->toString();
+        cout << '\n';
+    }    
 
 };
 
+
+
 int main() {
-    
+    Graph *lista = new Graph();
     Node eze("EZE");
     Node lax("LAX");
     Edge vuelo1(eze, lax, 12.4, 3456);
-    cout << "Hola" << vuelo1.toString();
-    return 0;    
+
+    cout << "Hola" << vuelo1.toString() << endl;
+
+    ifstream file1("../resources/aeropuertos.txt");
+    
+	string iata;
+	string nombre;
+	string ciudad;
+	string pais;
+	float superficie;
+	int terminales;
+	int destNacionales;
+	int destInternacionales;
+    
+    while (file1 >> iata >> nombre >> ciudad >> pais >> superficie >> terminales >> destNacionales >> destInternacionales)
+    {
+        //cout << iata << " " << nombre << endl;
+        Node aeropuerto(iata);
+        lista->addAeropuerto(aeropuerto);       
+    }
+    
+    lista->showlist();
+    
+    file1.close();
+
+    ifstream file2("../resources/vuelos.txt");
+    
+	string origen;
+	string destino;
+	int costo_vuelo;
+	float tiempo_vuelo;
+    
+    while (file2 >> origen >> destino >> costo_vuelo >> tiempo_vuelo)
+    {
+        //cout << origen << " " << destino << " " << costo_vuelo << " " << tiempo_vuelo << endl;
+        Edge vuelo(origen, destino, costo_vuelo, tiempo_vuelo);
+        lista->addVueloANodo(origen, vuelo);
+    }
+    
+    lista->showlist();
+    
+    file2.close();
+
+    return 0;
 }
