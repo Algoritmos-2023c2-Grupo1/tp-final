@@ -1,13 +1,14 @@
 #include <iostream>
-#include <iterator>
-#include<fstream>
-#include <string>
 #include <list>
+#include <string>
+#include <iterator>
+#include <fstream>
 
 using namespace std;
 
+// ToDo: Separar en distintos archivos Edge, Node y Graph.
+
 class Edge;
-class Node;
 
 class Node {
 private:
@@ -30,33 +31,19 @@ public:
     }
     
     string toString() {
-        return "\n \tNode [iata=" + iata + ", vuelos=" + showlist() + "]";
+        return "Nodo ["+iata+", vuelos="+to_string(vuelos->size())+"]\n";
     }
-
-    string showlist()
-    {
-        string output = "";
-        
-/*
-        list<Edge>::iterator it;
-        for (it = vuelos->begin(); it != vuelos->end(); ++it)
-            string txt = it->toString();
-            output += '\t' + txt + "\t";
-*/
-        return to_string(vuelos->size());
-    }
-
 };
 
 class Edge {
 private:
     Node origen;
     Node destino;
-    float tiempo_vuelo;
     int costo_vuelo;
+    float tiempo_vuelo;
 
 public:
-    Edge(Node origen, Node destino, float tiempo_vuelo, int costo_vuelo) 
+    Edge(Node origen, Node destino, int costo_vuelo, float tiempo_vuelo) 
     {
         this->origen = origen;
         this->destino = destino;
@@ -95,12 +82,10 @@ public:
     void setCostoVuelo(int costo) {
         this->costo_vuelo = costo;
     }
+    
     string toString() {
-        return 
-            "\n Edge [origen=" + origen.getIATA() + 
-                   ", destino=" + destino.getIATA() + 
-                   ", tiempo=" + to_string(tiempo_vuelo) +
-                   ", costo=" + to_string(costo_vuelo) + "]";
+        return "Edge ["+origen.getIATA()+" a "+destino.getIATA()+" "
+            +to_string(tiempo_vuelo)+"hs, USD"+to_string(costo_vuelo)+"]";
     }
 };
 
@@ -137,45 +122,43 @@ public:
     {
         list<Node>::iterator it;
         for (it = nodes->begin(); it != nodes->end(); ++it)
-            cout << '\t' << it->toString();
-        cout << '\n';
+        {
+            cout << it->toString();
+            list<Edge>::iterator at;
+            for (at = it->getVuelos()->begin(); at != it->getVuelos()->end(); ++at)
+            {
+                cout << "\t" << at->toString() << "\n";
+            }        
+            cout << "\n";
+        }
     }    
-
 };
 
 
 
 int main() {
     Graph *lista = new Graph();
-    Node eze("EZE");
-    Node lax("LAX");
-    Edge vuelo1(eze, lax, 12.4, 3456);
 
-    cout << "Hola" << vuelo1.toString() << endl;
-
-    ifstream file1("../resources/aeropuertos.txt");
-    
-	string iata;
-	string nombre;
-	string ciudad;
-	string pais;
-	float superficie;
-	int terminales;
-	int destNacionales;
-	int destInternacionales;
+    ifstream file1("aeropuertos.txt");
+    string iata;
+    string nombre;
+    string ciudad;
+    string pais;
+    float superficie;
+    int terminales;
+    int destNacionales;
+    int destInternacionales;
     
     while (file1 >> iata >> nombre >> ciudad >> pais >> superficie >> terminales >> destNacionales >> destInternacionales)
     {
-        //cout << iata << " " << nombre << endl;
+        // ToDo: Agregar el resto de los campos al objeto Nodo.
         Node aeropuerto(iata);
         lista->addAeropuerto(aeropuerto);       
     }
     
-    lista->showlist();
-    
     file1.close();
 
-    ifstream file2("../resources/vuelos.txt");
+    ifstream file2("vuelos.txt");
     
 	string origen;
 	string destino;
@@ -184,13 +167,12 @@ int main() {
     
     while (file2 >> origen >> destino >> costo_vuelo >> tiempo_vuelo)
     {
-        //cout << origen << " " << destino << " " << costo_vuelo << " " << tiempo_vuelo << endl;
         Edge vuelo(origen, destino, costo_vuelo, tiempo_vuelo);
         lista->addVueloANodo(origen, vuelo);
     }
     
     lista->showlist();
-    
+
     file2.close();
 
     return 0;
