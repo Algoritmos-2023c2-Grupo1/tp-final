@@ -8,8 +8,10 @@
 using namespace std;
 
 int main() {
+    // TODO: Esto se haria en Aplicacion
     Graph *grafo = new Graph();
 
+    // TODO: Pasar esta logica a LectorArchivos, puede retornar la lista de aeropuertos, o el lector puede ver el grafo y el codigo quedaria casi igual
     ifstream file1("../resources/aeropuertos.txt");
     string iata;
     string nombre;
@@ -28,7 +30,7 @@ int main() {
     }
 
     file1.close();
-
+    // TODO: Pasar esta logica a LectorArchivos, puede retornar la lista de vuelos, o el lector puede ver el grafo y el codigo quedaria casi igual
     ifstream file2("../resources/vuelos.txt");
 
     string origen;
