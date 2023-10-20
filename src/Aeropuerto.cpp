@@ -53,3 +53,15 @@ Aeropuerto::Aeropuerto(const string &codigoIata,
     destinos_internacionales(cantidadDestinosInternacionales) {
 
 }
+
+void Aeropuerto::addVuelo(Vuelo &edge) {
+    vuelos.push_back(edge);
+}
+
+list<Vuelo> Aeropuerto::getVuelos() {
+    return vuelos;
+}
+
+string Aeropuerto::toString() {
+    return "Nodo [" + codigo_IATA + ", vuelos=" + to_string(vuelos.size()) + "]\n";
+}

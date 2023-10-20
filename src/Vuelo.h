@@ -2,8 +2,10 @@
 #define TP_FINAL_VUELO_H
 
 #include <string>
+#include "Aeropuerto.h"
 
 using namespace std;
+class Aeropuerto;
 
 class Vuelo {
 private:
@@ -11,11 +13,21 @@ private:
     string codigoIATADestino;
     float costoVuelo;
     float horasVuelo;
+    Aeropuerto *aeropuertoPartida;
+    Aeropuerto *aeropuertoDestino;
 public:
     Vuelo(const string &codigoIataPartida,
           const string &codigoIataDestino,
           const float costoVuelo,
           const float horasVuelo);
+
+    Vuelo(const string &codigoIataPartida,
+          const string &codigoIataDestino,
+          const float costoVuelo,
+          const float horasVuelo,
+          Aeropuerto *aeropuertoPartida,
+          Aeropuerto *aeropuertoDestino
+    );
 
     string getCodigoIATAPartida() const;
 
@@ -24,6 +36,12 @@ public:
     float getCostoVuelo() const;
 
     float getHorasVuelo() const;
+
+    Aeropuerto *getAeropuertoPartida() const;
+
+    Aeropuerto *getAeropuertoDestino() const;
+
+    string toString() const;
 };
 
 

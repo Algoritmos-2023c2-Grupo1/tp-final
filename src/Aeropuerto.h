@@ -2,8 +2,12 @@
 #define TP_FINAL_AEROPUERTO_H
 
 #include <string>
+#include "Vuelo.h"
+#include "list"
 
 using namespace std;
+
+class Vuelo;
 
 class Aeropuerto {
 private:
@@ -15,6 +19,7 @@ private:
     int cantidad_terminales;
     int destinos_nacionales;
     int destinos_internacionales;
+    list<Vuelo> vuelos;
 
 public:
     Aeropuerto(const string &codigoIata,
@@ -41,6 +46,12 @@ public:
     int getDestinosNacionales() const;
 
     int getDestinosInternacionales() const;
+
+    void addVuelo(Vuelo &edge);
+
+    list<Vuelo> getVuelos();
+
+    string toString();
 };
 
 
