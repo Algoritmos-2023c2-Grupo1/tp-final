@@ -111,8 +111,15 @@ title: UML - Aplicación para el manejo de aeropuertos y vuelos
 ---
 
 classDiagram
-    class Grafo~tipo~ {
 
+    class Grafo {
+        -list~Aeropuerto~ aeropuertos
+        +addAeropuerto(Aeropuerto nodo)
+        +getAeropuertos() list~Aeropuerto~
+        +toString() string 
+        +addVueloANodo(iata string, vuelo Vuelo)
+        +showlist()
+        +obtenerVuelosDesdeHasta(codigo_IATA_partida: String, codigo_IATA_destino: String): Lista<Vuelo>
     }
     
     class Lista~tipo~ {
@@ -128,14 +135,18 @@ classDiagram
         -int cantidad_terminales 
         -int destinos_nacionales 
         -int destinos_internacionales
-        +getCodigo_IATA(): string
-        +getNombre(): string
-        +getCiudad(): string
-        +getPais(): string
-        +getSuperficie(): float
-        +getCantidad_terminales(): int
-        +getDestinos_nacionales(): int
-        +getDestinos_internacionales(): int
+        -list~Vuelo~ vuelos
+        +getCodigo_IATA() string
+        +getNombre() string
+        +getCiudad() string
+        +getPais() string
+        +getSuperficie() float
+        +getCantidad_terminales() int
+        +getDestinos_nacionales() int
+        +getDestinos_internacionales() int
+        +addVuelo(edge: Vuelo)
+        +getVuelos() list~Vuelo~
+        +toString() string
     }
 
     class Vuelo {
@@ -143,57 +154,58 @@ classDiagram
         -string código_IATA_destino 
         -int costo_vuelo 
         -float horas_vuelo
-        +getCodigoIATAPartida() : string 
-        +getCodigoIATADestino() : string 
-        +getCostoVuelo() : int 
-        +getHorasVuelo() : float
+        -Aeropuerto aeropuertoPartida;
+        -Aeropuerto aeropuertoDestino;
+        +getCodigoIATAPartida() string 
+        +getCodigoIATADestino() string 
+        +getCostoVuelo() int 
+        +getHorasVuelo() float
+        +getAeropuertoPartida() Aeropuerto
+        +getAeropuertoDestino() Aeropuerto
+        +toString() string
     }
     
-    class GrafoAeropuertos {
+    class Hash {
         +agregarAeropuerto(aeropuerto: Aeropuerto): void
         +eliminarAeropuerto(codigo_IATA: String): void
         +obtenerAeropuerto(codigo_IATA: String): Aeropuerto
-        +listarAeropuertosPorCodigoIATA(): Lista<Aeropuerto>
+        +listarAeropuertosPorCodigoIATA(): Lista~Aeropuerto~
     }
 
-    class GrafoVuelos {
-        +agregarVuelo(vuelo: Vuelo): void
-        +obtenerVuelosDesdeHasta(codigo_IATA_partida: String, codigo_IATA_destino: String): Lista<Vuelo>
-    }
-    
     class MenuPrincipal {
         +obtenerInfoAeropuerto(): void
         +crearAeropuerto(): void
         +eliminarAeropuerto(): void
         +listarAeropuertosPorCodigoIATA(): void
-        +buscarRutaMasEconomica(): void
-        +buscarRutaMasRapida(): void
+        +buscarRutaMasEconomica(): list~Vuelo~
+        +buscarRutaMasRapida(): list~Vuelo~
     }
     
     class Aplicacion {
-        -grafoAeropuertos: GrafoAeropuertos
-        -grafoVuelos: GrafoVuelos
+        -grafo: Grafo
+        -hash: Hash
         -menuPrincipal: MenuPrincipal
         +iniciar(): void
     }
     
     class LectorArchivos {
-        +obtenerAereopuertosDesdeArchivo(nombreArchivo: String): Lista<Aeropuerto>
-        +obtenerVuelosDesdeArchivo(nombreArchivo: String): Lista<Vuelo>
+        +obtenerAereopuertosDesdeArchivo(nombreArchivo: String): list~Aeropuerto~
+        +obtenerVuelosDesdeArchivo(nombreArchivo: String): list~Vuelo~
     }
 
-    Aplicacion --|> GrafoAeropuertos
-    Aplicacion --|> GrafoVuelos
+    Aplicacion --|> Grafo
+    Aplicacion --|> Hash
     Aplicacion --|> MenuPrincipal
 		
     Aeropuerto --|> LectorArchivos
-    Aeropuerto --|> GrafoAeropuertos
+    Aeropuerto --|> Grafo
     
-    GrafoAeropuertos --|> MenuPrincipal
-    GrafoVuelos --|> MenuPrincipal
+    Grafo --|> MenuPrincipal
+    
     Vuelo --|> LectorArchivos
-    Vuelo --|> GrafoVuelos
+    Vuelo --|> Grafo
 
-    Grafo --|> GrafoVuelos
-    Grafo --|> GrafoAeropuertos
+    Lista~tipo~ --|> Hash
+    Grafo --|> Hash
+    LectorArchivos --|> Hash
 ```
