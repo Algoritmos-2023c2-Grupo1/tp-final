@@ -37,6 +37,8 @@ public:
 
     float getHorasVuelo() const;
 
+    string getTiempoVuelo() const;
+
     Aeropuerto *getAeropuertoPartida() const;
 
     Aeropuerto *getAeropuertoDestino() const;

@@ -63,5 +63,5 @@ list<Vuelo> Aeropuerto::getVuelos() {
 }
 
 string Aeropuerto::toString() {
-    return "Nodo [" + codigo_IATA + ", vuelos=" + to_string(vuelos.size()) + "]\n";
+    return "Aeropuerto [" + codigo_IATA + ", vuelos=" + to_string(vuelos.size()) + "]\n";
 }

@@ -41,6 +41,11 @@ float Vuelo::getHorasVuelo() const {
     return horasVuelo;
 }
 
+string Vuelo::getTiempoVuelo() const {
+    return to_string((unsigned int)horasVuelo) + ':' +
+            to_string((unsigned int)(60 * (horasVuelo - (unsigned int)horasVuelo)));
+}
+
 Aeropuerto* Vuelo::getAeropuertoPartida() const {
     return aeropuertoPartida;
 }
@@ -50,6 +55,7 @@ Aeropuerto* Vuelo::getAeropuertoDestino() const {
 }
 
 string Vuelo::toString() const {
-    return "\n Edge [origin=" + aeropuertoPartida->getCiudad() + ", destination=" + aeropuertoDestino->getCiudad() +
-           ", distance=" + to_string(horasVuelo) + "]";
+    return "Vuelo [" + codigoIATAPartida + " a " + 
+                    codigoIATADestino + " (" + getTiempoVuelo()+
+                    ") USD" + to_string(getCostoVuelo()) + "]";           
 }

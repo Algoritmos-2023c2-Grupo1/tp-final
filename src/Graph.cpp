@@ -1,5 +1,5 @@
+#include <iostream>
 #include "Graph.h"
-#include "iostream"
 
 using namespace std;
 
@@ -16,22 +16,22 @@ string Graph::toString() {
 }
 
 void Graph::addVueloANodo(string iata, Vuelo vuelo) {
-    list<Aeropuerto>::iterator it;
-    for (it = aeropuertos->begin(); it != aeropuertos->end(); ++it) {
-        if (it->getCodigoIATA() == iata)
-            it->addVuelo(vuelo);
-    }
+    for(auto& aeropuerto : *aeropuertos)
+        {
+            if (aeropuerto.getCodigoIATA() == iata)
+                aeropuerto.addVuelo(vuelo);
+        }
 }
 
 void Graph::showlist() {
-    list<Aeropuerto>::iterator it;
-    for (it = aeropuertos->begin(); it != aeropuertos->end(); ++it) {
-        cout << it->toString();
-        list<Vuelo>::iterator at;
-        for (at = it->getVuelos().begin(); at != it->getVuelos().end(); ++at) {
-            cout << "\t" << at->toString() << "\n";
+    for(auto& aeropuerto : *aeropuertos)
+    {
+        cout << aeropuerto.toString();       
+        for(const auto& vuelo : aeropuerto.getVuelos())
+        {
+            cout << vuelo.toString() << "\n";
         }
-        cout << "\n";
+        cout<<"\n";
     }
 }
 
