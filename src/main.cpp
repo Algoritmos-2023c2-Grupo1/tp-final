@@ -1,21 +1,15 @@
-#include "LectorArchivos.h"
 #include "iostream"
-
+#include <vector>
+#include "Menu.cpp"
 using namespace std;
 
+
+
 int main() {
-    vector<Aeropuerto> aeropuertos = LectorArchivos::obtenerAeropuertosDesdeArchivo();
 
-    for (const Aeropuerto &aeropuerto: aeropuertos) {
-        cout << "Aeropuerto: " << aeropuerto.getNombre() << " (IATA: " << aeropuerto.getCodigoIATA() << ")" << endl;
-    }
+	Menu menu = Menu();
 
-    vector<Vuelo> vuelos = LectorArchivos::obtenerVuelosDesdeArchivo();
+	menu.start();
 
-    for (const Vuelo vuelo: vuelos) {
-        cout << "Vuelo: desde " << vuelo.getCodigoIATAPartida() << " hasta " << vuelo.getCodigoIATADestino()
-             << " con costo $" << vuelo.getCostoVuelo()
-             << " con horas " << vuelo.getHorasVuelo() << "hs."
-             << endl;
-    }
+	return 0;
 };
