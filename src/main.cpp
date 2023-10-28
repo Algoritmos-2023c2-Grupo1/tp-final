@@ -1,5 +1,3 @@
-#include "iostream"
-#include <vector>
 #include "Menu.cpp"
 using namespace std;
 
@@ -12,4 +10,4 @@ int main() {
 	menu.start();
 
 	return 0;
-};
+}
