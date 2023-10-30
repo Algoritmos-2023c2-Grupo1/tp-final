@@ -37,8 +37,8 @@ void Controlador::consultar() {
 	{
 		string iata;
 		generarEspacio();
-		cout << "******************** PERFECTO, VAMOS A REALIZAR LA CONSULTA *******************" << endl;
-		cout << "*******************************************************************************" << endl;
+		cout << "******************* PERFECTO, VAMOS A REALIZAR LA CONSULTA ******************" << endl;
+		cout << "*****************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
 		cout << "C�digo IATA: "; cin >> iata; cout << "" << endl;
 		//ac� enviaria el codigo al manejador para que traiga el aeropuerto;
@@ -57,8 +57,8 @@ void Controlador::alta() {
 		string iata, nombre, ciudad, pais;
 		float superficie;
 		int terminales, dest_nacionales, dest_internacionales;
-		cout << "***********************  PERFECTO, VAMOS A DAR DE ALTA ***************************" << endl;
-		cout << "**********************************************************************************" << endl;
+		cout << "********************* PERFECTO, VAMOS A DAR DE ALTA *************************" << endl;
+		cout << "*****************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
 		cout << "C�digo IATA: "; cin >> iata; cout << "" << endl;
 		cout << "Nombre: ";  cin >> nombre; cout << "" << endl;
@@ -85,8 +85,8 @@ void Controlador::baja() {
 	{
 		generarEspacio();
 		string iata;
-		cout << "***********************  PERFECTO, VAMOS A DAR DE BAJA ***************************" << endl;
-		cout << "**********************************************************************************" << endl;
+		cout << "********************* PERFECTO, VAMOS A DAR DE BAJA *************************" << endl;
+		cout << "*****************************************************************************" << endl;
 		cout << "Ingrese el dato solicitado" << endl;
 		cout << "C�digo IATA: "; cin >> iata; cout << "" << endl;
 		
@@ -175,8 +175,8 @@ void Controlador::error() {
 void Controlador::aguardar() {
 	cout << "Aguarde un momento";
 	for (int i = 0; i < 5; i++) {
-		cout << " .";
+		cout << ".";
 		Sleep(1000);
 	}
-	cout << "" << endl;
+	cout << endl;
 }

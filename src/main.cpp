@@ -12,4 +12,4 @@ int main() {
 	menu.start();
 
 	return 0;
-};
+}
