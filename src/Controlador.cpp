@@ -2,8 +2,6 @@
 #include <windows.h>
 #include <limits> 
 #include <iostream>
-#include <wchar.h>
-#include <locale.h>
 #include "Controlador.h"
 
 
@@ -37,14 +35,13 @@ void Controlador::generarEspacio() {
 void Controlador::consultar() {
 	try
 	{
-		setlocale(LC_ALL, "");
 		string iata;
 		generarEspacio();
 		cout << "******************** PERFECTO, VAMOS A REALIZAR LA CONSULTA *******************" << endl;
 		cout << "*******************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
-		cout << "Código IATA: "; cin >> iata; cout << "" << endl;
-		//acá enviaria el codigo al manejador para que traiga el aeropuerto;
+		cout << "Cï¿½digo IATA: "; cin >> iata; cout << "" << endl;
+		//acï¿½ enviaria el codigo al manejador para que traiga el aeropuerto;
 		aguardar();
 	}
 	catch (int n)
@@ -56,7 +53,6 @@ void Controlador::consultar() {
 void Controlador::alta() {
 	try
 	{
-		setlocale(LC_ALL, "");
 		generarEspacio();
 		string iata, nombre, ciudad, pais;
 		float superficie;
@@ -64,17 +60,17 @@ void Controlador::alta() {
 		cout << "***********************  PERFECTO, VAMOS A DAR DE ALTA ***************************" << endl;
 		cout << "**********************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
-		cout << "Código IATA: "; cin >> iata; cout << "" << endl;
+		cout << "Cï¿½digo IATA: "; cin >> iata; cout << "" << endl;
 		cout << "Nombre: ";  cin >> nombre; cout << "" << endl;
 		cout << "Ciudad: ";  cin >> ciudad; cout << "" << endl;
-		cout << "País: ";  cin >> pais; cout << "" << endl;
+		cout << "Paï¿½s: ";  cin >> pais; cout << "" << endl;
 		cout << "Superficie: ";  cin >> superficie; cout << "" << endl;
 		cout << "Cantidad de terminales: ";  cin >> terminales; cout << "" << endl;
 		cout << "Cantidad de destinos nacionales: ";  cin >> dest_nacionales; cout << "" << endl;
 		cout << "Cantidad de destinos internacionales: ";  cin >> dest_internacionales; cout << "" << endl;
 
-		//Acá se envian los datos al manejador para que lo agregue.
-		// y se avisa que la tarea salió satisfactoria.
+		//Acï¿½ se envian los datos al manejador para que lo agregue.
+		// y se avisa que la tarea saliï¿½ satisfactoria.
 		//  
 		aguardar();
 	}
@@ -87,18 +83,17 @@ void Controlador::alta() {
 void Controlador::baja() {
 	try
 	{
-		setlocale(LC_ALL, "");
 		generarEspacio();
 		string iata;
 		cout << "***********************  PERFECTO, VAMOS A DAR DE BAJA ***************************" << endl;
 		cout << "**********************************************************************************" << endl;
 		cout << "Ingrese el dato solicitado" << endl;
-		cout << "Código IATA: "; cin >> iata; cout << "" << endl;
+		cout << "Cï¿½digo IATA: "; cin >> iata; cout << "" << endl;
 		
-		// Acá se manda el código IATA al manejador de aeropuertos para que devuelva el aeropuerto.
+		// Acï¿½ se manda el cï¿½digo IATA al manejador de aeropuertos para que devuelva el aeropuerto.
 		// Se muestran los datos del aeropuerto y se pregunta si quiere continuar.
 		aguardar();
-		// Si pone que SÍ se da de baja
+		// Si pone que Sï¿½ se da de baja
 	}
 	catch (int n)
 	{
@@ -108,12 +103,11 @@ void Controlador::baja() {
 void Controlador::mostrarTodos() {
 	try
 	{
-		setlocale(LC_ALL, "");
 		generarEspacio();
-		cout << "***************** PERFECTO, SE MOSTRARÁN TODOS LOS AEROPUERTOS ********************" << endl;
+		cout << "***************** PERFECTO, SE MOSTRARï¿½N TODOS LOS AEROPUERTOS ********************" << endl;
 		cout << "***********************************************************************************" << endl;
 		aguardar();
-		//Acá hace la llamada al manejador de los aeropuertos
+		//Acï¿½ hace la llamada al manejador de los aeropuertos
 		// para que devuelva un lista y se itera mostrandola.
 	}
 	catch (int n)
@@ -125,25 +119,24 @@ void Controlador::mostrarTodos() {
 void Controlador::caminoMinimo() {
 	try
 	{
-		setlocale(LC_ALL, "");
 		generarEspacio();
 		string iataorigen, iatadestino;
 		int opcion;
-		cout << "***********************  PERFECTO, VAMOS A AVERIGUAR LA MEJOR OPCIÓN **************************" << endl;
+		cout << "***********************  PERFECTO, VAMOS A AVERIGUAR LA MEJOR OPCIï¿½N **************************" << endl;
 		cout << "***********************************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
-		cout << "Código IATA origen: "; cin >> iataorigen; cout << "" << endl;
-		cout << "Código IATA destino: "; cin >> iatadestino; cout << "" << endl;
-		cout << "Ahora ingrese el tipo de combinación " << endl;
-		cout << "1 _ Más económica." << endl;
+		cout << "Cï¿½digo IATA origen: "; cin >> iataorigen; cout << "" << endl;
+		cout << "Cï¿½digo IATA destino: "; cin >> iatadestino; cout << "" << endl;
+		cout << "Ahora ingrese el tipo de combinaciï¿½n " << endl;
+		cout << "1 _ Mï¿½s econï¿½mica." << endl;
 		cout << "2 _ Menor tiempo." << endl;
 		cin >> opcion;
 		aguardar();
 
-		//Acá se envían los datos al manejador para que devuelva la lista de combinaciones 
+		//Acï¿½ se envï¿½an los datos al manejador para que devuelva la lista de combinaciones 
 		// y se itera para mostrar
 
-		//De estar vacía hay que avisar que no hay conexiones posibles.
+		//De estar vacï¿½a hay que avisar que no hay conexiones posibles.
 	}
 	catch (const std::exception&)
 	{
@@ -152,10 +145,9 @@ void Controlador::caminoMinimo() {
 }
 void Controlador::salir() {
 	try {
-		setlocale(LC_ALL, "");
 		generarEspacio();
 		cout << "***********************************************************************************" << endl;
-		cout << "***************** LA APLICACIÓN SE CERRARA, HASTA LUEGO!! *******************" << endl;
+		cout << "******************** LA APLICACIï¿½N SE CERRARA, HASTA LUEGO!! **********************" << endl;
 		cout << "***********************************************************************************" << endl;
 		Sleep(3000);
 	}
@@ -165,10 +157,9 @@ void Controlador::salir() {
 }
 void Controlador::error() {
 	try {
-		setlocale(LC_ALL, "");
 		cout << "" << endl;
 		cout << "" << endl;
-		cout << "************************ OPCIÓN ELEGIDA INCORRECTA **************************" << endl;
+		cout << "************************ OPCIï¿½N ELEGIDA INCORRECTA **************************" << endl;
 		cout << "*************************** Vuelva a intentarlo *****************************" << endl;
 		cout << "*****************************************************************************" << endl;
 		Sleep(5000);
