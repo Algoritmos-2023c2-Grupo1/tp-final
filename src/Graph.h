@@ -19,6 +19,8 @@ public:
     void addVueloANodo(string iata, Vuelo vuelo);
 
     void showlist();
+
+    Aeropuerto getAeropuerto(string iata);
 };
 
 #endif //TP_FINAL_GRAPH_H

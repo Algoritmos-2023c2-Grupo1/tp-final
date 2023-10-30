@@ -35,6 +35,20 @@ void Graph::showlist() {
     }
 }
 
+Aeropuerto Graph::getAeropuerto(string iata){
+
+    Aeropuerto _aeropuerto = Aeropuerto( "","","","",0,0,
+                                        0,0);
+
+    for(auto& aeropuerto : *aeropuertos)
+    {
+        if(aeropuerto.getCodigoIATA() == iata){
+            _aeropuerto = aeropuerto;
+        }
+    }
+    return _aeropuerto;
+};
+
 Graph::Graph() {
     aeropuertos = new list<Aeropuerto>();
 }
