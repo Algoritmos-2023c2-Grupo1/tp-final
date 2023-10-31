@@ -5,80 +5,74 @@
 
 using namespace std;
 
-template <class T>
+template<class T>
 class Cola {
 private:
     // Clase interna
     class Nodo {
     public:
-	    T dato;
-	    Nodo* siguiente;
-	    
-	    Nodo(T d)
-	    {
-		    dato = d;
-		    siguiente = NULL;
-	    }
+        T dato;
+        Nodo *siguiente;
+
+        Nodo(T d) {
+            dato = d;
+            siguiente = NULL;
+        }
     };
+
 public:
-	Nodo *primero;
-	Nodo *ultimo;
-	
-	Cola() 
-	{ 
-		primero = NULL; 
-		ultimo = NULL;
-	}
+    Nodo *primero;
+    Nodo *ultimo;
 
-	void aColar(T x)
-	{
-		Nodo* temp = new Nodo(x);
+    Cola() {
+        primero = NULL;
+        ultimo = NULL;
+    }
 
-		if (ultimo == NULL) {
-			primero = ultimo = temp;
-			return;
-		}
+    void aColar(T x) {
+        Nodo *temp = new Nodo(x);
 
-		ultimo->siguiente = temp;
-		ultimo = temp;
-	}
+        if (ultimo == NULL) {
+            primero = ultimo = temp;
+            return;
+        }
 
-	T desaColar()
-	{
-		if (primero == NULL)
-			exit (1);
+        ultimo->siguiente = temp;
+        ultimo = temp;
+    }
 
-		Nodo* temp = primero;
-		T dato = temp->dato;
-		primero = primero->siguiente;
+    T desaColar() {
+        if (primero == NULL)
+            exit(1);
 
-		if (primero == NULL)
-			ultimo = NULL;
-    
-        	delete(temp);
-		return dato;
-	}
+        Nodo *temp = primero;
+        T dato = temp->dato;
+        primero = primero->siguiente;
 
-	void mostrar()
-	{
-		Nodo* temp;
+        if (primero == NULL)
+            ultimo = NULL;
 
-		if (primero == NULL) {
-			cout << "\nCola Underflow";
-			exit(1);
-		}
-		else 
-		{
-			temp = primero;
-			while (temp != NULL) {
-				cout << temp->dato;
-				temp = temp->siguiente;
-				if (temp != NULL)
-					cout << " <- ";
-			}
-			cout << endl;
-		}
-	}	
+        delete (temp);
+        return dato;
+    }
+
+    void mostrar() {
+        Nodo *temp;
+
+        if (primero == NULL) {
+            cout << "\nCola Underflow";
+            exit(1);
+        } else {
+            temp = primero;
+            while (temp != NULL) {
+                cout << temp->dato;
+                temp = temp->siguiente;
+                if (temp != NULL)
+                    cout << " <- ";
+            }
+            cout << endl;
+        }
+    }
 };
 
 #endif //TP_FINAL_COLA_H

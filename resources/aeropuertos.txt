@@ -1,6 +1,6 @@
 EZE Aeropuerto-Ministro-Pistarini Ezeiza Argentina 34.75 4 12 46
 LAX Aeropuerto-de-los-Angeles Los-Angeles EEUU 14.0 9 87 69
-JFK Aeropuerto-John-F.-Kennedy Nueva-York EEUU 24.0 6 59 89
+JFK Aeropuerto-John-F-Kennedy Nueva-York EEUU 24.0 6 59 89
 CDG Aeropuerto-Charles-de-Gaulle Paris Francia 32.2 3 71 101
 DXB Aeropuerto-de-Dubai Dubai Emiratos-Arabes-Unidos 18.6 2 52 78
 ICN Aeropuerto-de-Incheon Incheon Corea-del-Sur 20.8 4 43 67
