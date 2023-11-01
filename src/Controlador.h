@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Graph.h"
 
 using namespace std;
 
@@ -18,9 +19,13 @@ using namespace std;
 class Controlador {
 
 private:
-
+    Graph *grafo;
 
 public:
+    Controlador(Graph *grafo);
+
+    Controlador();
+
     void saludo();
     void continuarOpciones();
     void cargaDatosError();

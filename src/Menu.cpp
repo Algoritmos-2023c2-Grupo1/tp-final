@@ -6,10 +6,10 @@
 // mostrar todos los aeropuertos(ordenados por código IATA)
 // eleccion de camino minimo
 
-Menu::Menu() {
+Menu::Menu(Graph *graph) {
     opcion = 0;
     opciones = { "1. Consultar por un aeropuerto.", "2. Alta un nuevo aeropuerto", "3. Baja de un aeropuerto", "4. Mostrar todos los aeropuertos", "5. Elejir mejor opción de viaje", "6. Salir" };
-    controlador = Controlador();
+    controlador = Controlador(graph);
 }
 
 void Menu::start() {

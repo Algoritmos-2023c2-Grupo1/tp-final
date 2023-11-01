@@ -1,9 +1,12 @@
-#define NOMINMAX
+
 #include <windows.h>
 #include <limits> 
 #include <iostream>
 #include "Controlador.h"
 
+Controlador::Controlador(Graph *_grafo){
+    grafo = _grafo;
+};
 
 void Controlador::saludo() {
 
@@ -43,6 +46,28 @@ void Controlador::consultar() {
 		cout << "C�digo IATA: "; cin >> iata; cout << "" << endl;
 		//ac� enviaria el codigo al manejador para que traiga el aeropuerto;
 		aguardar();
+        Aeropuerto aeropuerto = grafo->getAeropuerto(iata);
+        if(aeropuerto.getCodigoIATA() != ""){
+            generarEspacio();
+            cout << "******************* Datos del aeropuerto buscado ******************" << endl;
+            cout << "C�digo IATA: " << aeropuerto.getCodigoIATA()<< endl;
+            cout << "Nombre: " << aeropuerto.getNombre()<< endl;
+            cout << "Ciudad: " << aeropuerto.getCiudad()<< endl;
+            cout << "País: " << aeropuerto.getPais()<< endl;
+            cout << "Superficie: " << aeropuerto.getSuperficie()<< endl;
+            cout << "Cantidad de terminales: " << aeropuerto.getCantidadTerminales()<< endl;
+            cout << "Destinos Nacionales: " << aeropuerto.getDestinosNacionales()<< endl;
+            cout << "Destinos Internacionales: " << aeropuerto.getDestinosInternacionales()<< endl;
+            cout << "Sus vuelos son: " << endl;
+            for(const auto& vuelo : aeropuerto.getVuelos()){
+//                 vuelo.getAeropuertoPartida()
+//                cout << "- Origen: " << vuelo.getAeropuertoPartida()->getNombre() << " - Destino: " << vuelo.getAeropuertoDestino()->getNombre() << " - Costo: $" << vuelo.getCostoVuelo() << " - Tiempo de vuelo estimado: "<< vuelo.getTiempoVuelo() << endl;
+                    cout << vuelo.toString();
+            }
+        }
+        else{
+            cout << "No se ha encontrado ningun aeropuerto con el código ingresado." << "" << endl;
+        }
 	}
 	catch (int n)
 	{
@@ -180,3 +205,5 @@ void Controlador::aguardar() {
 	}
 	cout << endl;
 }
+
+Controlador::Controlador() {}

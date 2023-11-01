@@ -6,6 +6,7 @@ El trabajo práctico consiste en realizar una aplicación para el manejo de aero
 vuelos.
 
 ### Aeropuertos
+
 La información de los aeropuertos estará dada en un archivo de texto `aeropuertos.txt` que
 deberá leerse al iniciar la aplicación.
 
@@ -15,7 +16,9 @@ En cada línea del archivo estará la información de un aeropuerto, separada po
 codigo_IATA nombre ciudad pais superficie #cantidad_terminales #destinos_nacionales #destinos_internacionales
 ```
 
-El código IATA es un código de tres letras que identifica a cada aeropuerto. Por ejemplo, EZE es el aeropuerto Ministro Pistarini de Ezeiza, COR es el aeropuerto Pajas Blancas de Córdoba. La superficie es un número flotante que indica los km2. Los últimos tres datos son números enteros con las cantidades correspondientes.
+El código IATA es un código de tres letras que identifica a cada aeropuerto. Por ejemplo, EZE es el aeropuerto Ministro
+Pistarini de Ezeiza, COR es el aeropuerto Pajas Blancas de Córdoba. La superficie es un número flotante que indica los
+km2. Los últimos tres datos son números enteros con las cantidades correspondientes.
 
 #### Ejemplo:
 
@@ -25,7 +28,8 @@ LAX Aeropuerto-Internacional-de-los-Angeles Los-Angeles EEUU 14 9 87 69
 ...
 ```
 
-En la primera línea tenemos al aeropuerto Ministro-Pistarini de Ezeiza (EZE), con 34,75 km2 de superficie, 4 terminales, 12 destinos nacionales y 46 internacionales.
+En la primera línea tenemos al aeropuerto Ministro-Pistarini de Ezeiza (EZE), con 34,75 km2 de superficie, 4 terminales,
+12 destinos nacionales y 46 internacionales.
 
 Se debe mostrar un menú en el cual se pueda:
 
@@ -43,7 +47,8 @@ Consideraciones
 
 ### Vuelos
 
-A partir de la lectura de un archivo de texto `vuelos.txt`, que deberá hacerse inmediatamente después de leer el archivo `aeropuertos.txt`,se generará un grafo pesado dirigido.
+A partir de la lectura de un archivo de texto `vuelos.txt`, que deberá hacerse inmediatamente después de leer el
+archivo `aeropuertos.txt`,se generará un grafo pesado dirigido.
 
 En cada línea estará la información de cada vuelo, separada por espacios:
 
@@ -62,11 +67,17 @@ FCO TXL 4736 2.25
 ...
 ```
 
-La primera línea indica que hay un vuelo directo de Ezeiza a Miami que dura 9,2hs, cuyo precio es $122.483. La segunda, de Ezeiza a Fiumicino, Roma, dura 13 horas y sale $222.205. La tercera, de Fiumicino a Otto-Lilielenthal, Berlín, dura 2 horas y cuarto y su precio es de $4.736.
+La primera línea indica que hay un vuelo directo de Ezeiza a Miami que dura 9,2hs, cuyo precio es $122.483. La segunda,
+de Ezeiza a Fiumicino, Roma, dura 13 horas y sale $222.205. La tercera, de Fiumicino a Otto-Lilielenthal, Berlín, dura 2
+horas y cuarto y su precio es de $4.736.
 
-La aplicación debe pedir al usuario el ingreso de los códigos IATA de partida y de destino, y debe buscar la combinación de vuelos más económica o de menor tiempo. El usuario debe poder elegir si el camino mínimo está representado por el costo del vuelo o por la duración.
+La aplicación debe pedir al usuario el ingreso de los códigos IATA de partida y de destino, y debe buscar la combinación
+de vuelos más económica o de menor tiempo. El usuario debe poder elegir si el camino mínimo está representado por el
+costo del vuelo o por la duración.
 
-Se debe imprimir el detalle del vuelo, el costo de cada tramo (o el tiempo de vuelo) y el total del viaje. Si hubiera más de una combinación óptima, deberá listarlas todas. Puede suceder que no haya ninguna combinación, en ese caso se informa que no hay conexiones posibles.
+Se debe imprimir el detalle del vuelo, el costo de cada tramo (o el tiempo de vuelo) y el total del viaje. Si hubiera
+más de una combinación óptima, deberá listarlas todas. Puede suceder que no haya ninguna combinación, en ese caso se
+informa que no hay conexiones posibles.
 
 Consideraciones
 
@@ -89,7 +100,8 @@ métodos.
 ## Entrega
 
 Semanalmente cada equipo deberá realizar una exposición del avance del proyecto.
-La entrega final del trabajo será en horario de clases, momento en el que se hará la defensa del mismo. Por defensa se entiende la muestra del trabajo junto con una explicación por parte de cada uno de los integrantes.
+La entrega final del trabajo será en horario de clases, momento en el que se hará la defensa del mismo. Por defensa se
+entiende la muestra del trabajo junto con una explicación por parte de cada uno de los integrantes.
 
 ## Diseño UML
 
@@ -100,40 +112,20 @@ title: UML - Aplicación para el manejo de aeropuertos y vuelos
 
 classDiagram
 
-    class Nodo~tipo~ {
-        -~tipo~ dato
-        -Nodo* siguiente
-        +setDato(dato : ~tipo~)
-        +getDato() ~tipo~*
-        +setSiguiente(siguiente : Nodo*)
-        +getSiguiente() Nodo*
-    }
-
-    class Lista~tipo~ {
-	-Nodo~tipo~* primero
-        -int largo
-        -getNodo(pos : int) Nodo~tipo~*
-        +alta(nodo : Nodo~tipo~, pos : int)
-        +baja(pos : int)
-        +consulta(pos : int) ~tipo~*
-        +vacia() bool
-        +getLargo() int
-        +mostrar()
-    }
-
-    class Hash~tipo~ {
-        -int tamanio
-        -Lista~tipo~ *tabla
-        -funcionHash(key :int) int
-        +setDato(key :int, dato : ~tipo~)
-        +getDato(key : int)
-        +borrar(key :int)
-    }
-
-    class Grafo~tipo~ {
-
+    class Grafo {
+        -list~Aeropuerto~ aeropuertos
+        +addAeropuerto(Aeropuerto nodo)
+        +getAeropuertos() list~Aeropuerto~
+        +toString() string 
+        +addVueloANodo(iata string, vuelo Vuelo)
+        +showlist()
+        +obtenerVuelosDesdeHasta(codigo_IATA_partida: String, codigo_IATA_destino: String): Lista<Vuelo>
     }
     
+    class Lista~tipo~ {
+
+    }
+
     class Aeropuerto {
         -string codigo_IATA 
         -string nombre 
@@ -143,14 +135,18 @@ classDiagram
         -int cantidad_terminales 
         -int destinos_nacionales 
         -int destinos_internacionales
-        +getCodigo_IATA(): string
-        +getNombre(): string
-        +getCiudad(): string
-        +getPais(): string
-        +getSuperficie(): float
-        +getCantidad_terminales(): int
-        +getDestinos_nacionales(): int
-        +getDestinos_internacionales(): int
+        -list~Vuelo~ vuelos
+        +getCodigo_IATA() string
+        +getNombre() string
+        +getCiudad() string
+        +getPais() string
+        +getSuperficie() float
+        +getCantidad_terminales() int
+        +getDestinos_nacionales() int
+        +getDestinos_internacionales() int
+        +addVuelo(edge: Vuelo)
+        +getVuelos() list~Vuelo~
+        +toString() string
     }
 
     class Vuelo {
@@ -158,73 +154,58 @@ classDiagram
         -string código_IATA_destino 
         -int costo_vuelo 
         -float horas_vuelo
-        +getCodigoIATAPartida() : string 
-        +getCodigoIATADestino() : string 
-        +getCostoVuelo() : int 
-        +getHorasVuelo() : float
+        -Aeropuerto aeropuertoPartida;
+        -Aeropuerto aeropuertoDestino;
+        +getCodigoIATAPartida() string 
+        +getCodigoIATADestino() string 
+        +getCostoVuelo() int 
+        +getHorasVuelo() float
+        +getAeropuertoPartida() Aeropuerto
+        +getAeropuertoDestino() Aeropuerto
+        +toString() string
     }
     
-    class HashAeropuertos {
+    class Hash {
         +agregarAeropuerto(aeropuerto: Aeropuerto): void
         +eliminarAeropuerto(codigo_IATA: String): void
         +obtenerAeropuerto(codigo_IATA: String): Aeropuerto
-        +listarAeropuertosPorCodigoIATA(): Lista<Aeropuerto>
+        +listarAeropuertosPorCodigoIATA(): Lista~Aeropuerto~
     }
 
-    class GrafoVuelos {
-        +agregarVuelo(vuelo: Vuelo): void
-        +obtenerVuelosDesdeHasta(codigo_IATA_partida: String, codigo_IATA_destino: String): Lista<Vuelo>
-    }
-    
     class MenuPrincipal {
         +obtenerInfoAeropuerto(): void
         +crearAeropuerto(): void
         +eliminarAeropuerto(): void
         +listarAeropuertosPorCodigoIATA(): void
-        +buscarRutaMasEconomica(): void
-        +buscarRutaMasRapida(): void
+        +buscarRutaMasEconomica(): list~Vuelo~
+        +buscarRutaMasRapida(): list~Vuelo~
     }
     
     class Aplicacion {
-        -grafoAeropuertos: GrafoAeropuertos
-        -grafoVuelos: GrafoVuelos
+        -grafo: Grafo
+        -hash: Hash
         -menuPrincipal: MenuPrincipal
         +iniciar(): void
     }
     
     class LectorArchivos {
-        +obtenerAereopuertosDesdeArchivo(nombreArchivo: String): Lista<Aeropuerto>
-        +obtenerVuelosDesdeArchivo(nombreArchivo: String): Lista<Vuelo>
+        +obtenerAereopuertosDesdeArchivo(nombreArchivo: String): list~Aeropuerto~
+        +obtenerVuelosDesdeArchivo(nombreArchivo: String): list~Vuelo~
     }
 
-    Nodo~tipo~ --> Lista~tipo~
-    Lista~tipo~ --> Hash~tipo~
-
-    Aplicacion --|> HashAeropuertos
-    Aplicacion --|> GrafoVuelos
+    Aplicacion --|> Grafo
+    Aplicacion --|> Hash
     Aplicacion --|> MenuPrincipal
 		
     Aeropuerto --|> LectorArchivos
-    Aeropuerto --|> HashAeropuertos
+    Aeropuerto --|> Grafo
     
-    HashAeropuertos --|> MenuPrincipal
-
-    GrafoVuelos --|> MenuPrincipal
-
+    Grafo --|> MenuPrincipal
+    
     Vuelo --|> LectorArchivos
-    Vuelo --|> GrafoVuelos
+    Vuelo --|> Grafo
 
-    Hash~tipo~ --|> HashAeropuertos
-
-    Grafo --|> GrafoVuelos
-
-    
+    Lista~tipo~ --|> Hash
+    Grafo --|> Hash
+    LectorArchivos --|> Hash
 ```
-## Datos de prueba
-Para el desarrollo de la aplicación se utiliza los archivos de `aeropuertos.txt` y `vuelos.txt` que generan los siguientes grafos dirigidos y pesados según `horas_vuelo` o `costo_vuelo` respectivamente.
-
-### Grafo de vuelos por horas de vuelo
-![Grafo pesado y dirigido por horas de vuelos](graph-vuelos-tiempo.png?raw=true "Grafo de vuelos por horas de vuelo")
-
-### Grafo de vuelos por costo de vuelo
-![Grafo pesado y dirigido por costo de vuelo](graph-vuelos-costo.png?raw=true "Grafo de vuelos por costo de vuelo")
