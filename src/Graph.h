@@ -5,22 +5,31 @@
 
 class Graph {
 private:
-    list<Aeropuerto> *aeropuertos;
+    list<Aeropuerto *> aeropuertos;
 
 public:
-    Graph();
+    void addAeropuerto(Aeropuerto *aeropuerto);
 
-    void addAeropuerto(Aeropuerto &node);
-
-    list<Aeropuerto> *getAeropuertos();
+    list<Aeropuerto *> getAeropuertos();
 
     string toString();
 
-    void addVueloANodo(string iata, Vuelo vuelo);
+    void agregarVueloAAeropuerto(string iata, Vuelo *vuelo);
 
     void showlist();
 
-    Aeropuerto getAeropuerto(string iata);
+    std::optional<Aeropuerto *> getAeropuerto(string iata);
+
+    list<Vuelo*> buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
+
+    list<Vuelo*> buscarRutaMasCortaEnTiempo(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
+
+private:
+    int getMinDistanceIndex(const std::vector<float> &distancias, const std::vector<bool> &visitado);
+
+    int getAeropuertoIndex(Aeropuerto *aeropuerto);
+
+    Aeropuerto getAeropuertoByIndex(int aeropuertoIdx);
 };
 
 #endif //TP_FINAL_GRAPH_H

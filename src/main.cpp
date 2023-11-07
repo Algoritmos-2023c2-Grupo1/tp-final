@@ -24,9 +24,9 @@ int main() {
 
     while (file1 >> iata >> nombre >> ciudad >> pais >> superficie >> terminales >> destNacionales
                  >> destInternacionales) {
-        Aeropuerto *aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, terminales, destNacionales,
-                                                destInternacionales);
-        grafo->addAeropuerto(*aeropuerto);
+        auto *aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, terminales, destNacionales,
+                                          destInternacionales);
+        grafo->addAeropuerto(aeropuerto);
     }
 
     file1.close();
@@ -39,11 +39,18 @@ int main() {
     float tiempo_vuelo;
 
     while (file2 >> origen >> destino >> costo_vuelo >> tiempo_vuelo) {
-        Vuelo vuelo(origen, destino, costo_vuelo, tiempo_vuelo);
-        grafo->addVueloANodo(origen, vuelo);
+        auto *vuelo = new Vuelo(origen, destino, costo_vuelo, tiempo_vuelo);
+        grafo->agregarVueloAAeropuerto(origen, vuelo);
     }
 
     grafo->showlist();
+
+
+    list<Vuelo *> rutaMasCorta = grafo->buscarRutaMasCortaEnTiempo("EZE", "HKG");
+
+    for (Vuelo *vuelo: rutaMasCorta) {
+        cout << "vuelo => " << vuelo->getCodigoIATAPartida() << " -> " << vuelo->getCodigoIATADestino() << endl;
+    }
 
     file2.close();
 

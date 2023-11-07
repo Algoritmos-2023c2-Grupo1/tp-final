@@ -19,7 +19,7 @@ private:
     int cantidad_terminales;
     int destinos_nacionales;
     int destinos_internacionales;
-    list<Vuelo> vuelos;
+    list<Vuelo*> vuelos;
 
 public:
     Aeropuerto(const string &codigoIata,
@@ -47,11 +47,12 @@ public:
 
     int getDestinosInternacionales() const;
 
-    void addVuelo(Vuelo &edge);
+    void addVuelo(Vuelo *vuelo);
 
-    list<Vuelo> getVuelos();
+    list<Vuelo*> getVuelos() const;
 
     string toString();
+
 };
 
 

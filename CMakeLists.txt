@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(tp_final)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 include_directories(src)
 
@@ -16,4 +16,5 @@ add_executable(tp_final
         src/Cola.h
         src/Aplicacion.h
         src/Pila.h
+        src/Graph.h
 )

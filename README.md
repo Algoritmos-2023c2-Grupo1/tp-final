@@ -117,7 +117,7 @@ classDiagram
         +addAeropuerto(Aeropuerto nodo)
         +getAeropuertos() list~Aeropuerto~
         +toString() string 
-        +addVueloANodo(iata string, vuelo Vuelo)
+        +agregarVueloAAeropuerto(iata string, vuelo Vuelo)
         +showlist()
         +obtenerVuelosDesdeHasta(codigo_IATA_partida: String, codigo_IATA_destino: String): Lista<Vuelo>
     }

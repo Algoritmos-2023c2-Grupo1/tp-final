@@ -54,11 +54,11 @@ Aeropuerto::Aeropuerto(const string &codigoIata,
 
 }
 
-void Aeropuerto::addVuelo(Vuelo &edge) {
-    vuelos.push_back(edge);
+void Aeropuerto::addVuelo(Vuelo *vuelo) {
+    vuelos.push_back(vuelo);
 }
 
-list<Vuelo> Aeropuerto::getVuelos() {
+list<Vuelo*> Aeropuerto::getVuelos() const {
     return vuelos;
 }
 
