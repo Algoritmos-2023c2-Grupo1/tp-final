@@ -12,9 +12,9 @@ add_executable(tp_final
         src/Vuelo.cpp
         src/main.cpp
         src/Graph.cpp
+        src/Graph.h
         src/MenuPrincipal.h
         src/Cola.h
         src/Aplicacion.h
         src/Pila.h
-        src/Graph.h
 )
