@@ -1,12 +1,14 @@
 
 #include <windows.h>
-#include <limits> 
+#include <limits>
 #include <iostream>
+#include <algorithm>
 #include "Controlador.h"
 
 Controlador::Controlador(Graph *_grafo){
     grafo = _grafo;
 };
+
 
 void Controlador::saludo() {
 
@@ -16,6 +18,10 @@ void Controlador::saludo() {
 }
 
 void Controlador::continuarOpciones() {
+    cout <<""<< endl;
+    string enter;
+    cout << "Toque c y luego Enter para continuar..."<<endl;cin >> enter;
+    generarEspacio();
 	cout << "**************************** SIGAMOS TRABAJANDO *****************************" << endl;
 	cout << "*****************************************************************************" << endl;
 }
@@ -43,31 +49,20 @@ void Controlador::consultar() {
 		cout << "******************* PERFECTO, VAMOS A REALIZAR LA CONSULTA ******************" << endl;
 		cout << "*****************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
-		cout << "C�digo IATA: "; cin >> iata; cout << "" << endl;
+		cout << "Código IATA: "; cin >> iata; cout << "" << endl;
 		//ac� enviaria el codigo al manejador para que traiga el aeropuerto;
+        transform(iata.begin(), iata.end(), iata.begin(), ::toupper);
 		aguardar();
         Aeropuerto aeropuerto = grafo->getAeropuerto(iata);
         if(aeropuerto.getCodigoIATA() != ""){
             generarEspacio();
             cout << "******************* Datos del aeropuerto buscado ******************" << endl;
-            cout << "C�digo IATA: " << aeropuerto.getCodigoIATA()<< endl;
-            cout << "Nombre: " << aeropuerto.getNombre()<< endl;
-            cout << "Ciudad: " << aeropuerto.getCiudad()<< endl;
-            cout << "País: " << aeropuerto.getPais()<< endl;
-            cout << "Superficie: " << aeropuerto.getSuperficie()<< endl;
-            cout << "Cantidad de terminales: " << aeropuerto.getCantidadTerminales()<< endl;
-            cout << "Destinos Nacionales: " << aeropuerto.getDestinosNacionales()<< endl;
-            cout << "Destinos Internacionales: " << aeropuerto.getDestinosInternacionales()<< endl;
-            cout << "Sus vuelos son: " << endl;
-            for(const auto& vuelo : aeropuerto.getVuelos()){
-//                 vuelo.getAeropuertoPartida()
-//                cout << "- Origen: " << vuelo.getAeropuertoPartida()->getNombre() << " - Destino: " << vuelo.getAeropuertoDestino()->getNombre() << " - Costo: $" << vuelo.getCostoVuelo() << " - Tiempo de vuelo estimado: "<< vuelo.getTiempoVuelo() << endl;
-                    cout << vuelo.toString();
-            }
+            mostrarAeropuerto(aeropuerto);
         }
         else{
             cout << "No se ha encontrado ningun aeropuerto con el código ingresado." << "" << endl;
         }
+        continuarOpciones();
 	}
 	catch (int n)
 	{
@@ -85,10 +80,10 @@ void Controlador::alta() {
 		cout << "********************* PERFECTO, VAMOS A DAR DE ALTA *************************" << endl;
 		cout << "*****************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
-		cout << "C�digo IATA: "; cin >> iata; cout << "" << endl;
+		cout << "Código IATA: "; cin >> iata; cout << "" << endl;
 		cout << "Nombre: ";  cin >> nombre; cout << "" << endl;
 		cout << "Ciudad: ";  cin >> ciudad; cout << "" << endl;
-		cout << "Pa�s: ";  cin >> pais; cout << "" << endl;
+		cout << "País: ";  cin >> pais; cout << "" << endl;
 		cout << "Superficie: ";  cin >> superficie; cout << "" << endl;
 		cout << "Cantidad de terminales: ";  cin >> terminales; cout << "" << endl;
 		cout << "Cantidad de destinos nacionales: ";  cin >> dest_nacionales; cout << "" << endl;
@@ -113,7 +108,7 @@ void Controlador::baja() {
 		cout << "********************* PERFECTO, VAMOS A DAR DE BAJA *************************" << endl;
 		cout << "*****************************************************************************" << endl;
 		cout << "Ingrese el dato solicitado" << endl;
-		cout << "C�digo IATA: "; cin >> iata; cout << "" << endl;
+		cout << "Código IATA: "; cin >> iata; cout << "" << endl;
 		
 		// Ac� se manda el c�digo IATA al manejador de aeropuertos para que devuelva el aeropuerto.
 		// Se muestran los datos del aeropuerto y se pregunta si quiere continuar.
@@ -129,17 +124,21 @@ void Controlador::mostrarTodos() {
 	try
 	{
 		generarEspacio();
-		cout << "***************** PERFECTO, SE MOSTRAR�N TODOS LOS AEROPUERTOS ********************" << endl;
+		cout << "***************** PERFECTO, SE MOSTRARAN TODOS LOS AEROPUERTOS ********************" << endl;
 		cout << "***********************************************************************************" << endl;
 		aguardar();
-		//Ac� hace la llamada al manejador de los aeropuertos
-		// para que devuelva un lista y se itera mostrandola.
+        cout << "************************"<< endl;
+        for(auto aeropuerto : *grafo->getAeropuertos()){
+
+            mostrarAeropuerto(aeropuerto);
+            cout << "************************"<< endl;
+        }
 	}
 	catch (int n)
 	{
 		cargaDatosError();
 	}
-	
+	continuarOpciones();
 }
 void Controlador::caminoMinimo() {
 	try
@@ -147,13 +146,13 @@ void Controlador::caminoMinimo() {
 		generarEspacio();
 		string iataorigen, iatadestino;
 		int opcion;
-		cout << "***********************  PERFECTO, VAMOS A AVERIGUAR LA MEJOR OPCI�N **************************" << endl;
+		cout << "***********************  PERFECTO, VAMOS A AVERIGUAR LA MEJOR OPCIÓN **************************" << endl;
 		cout << "***********************************************************************************************" << endl;
 		cout << "Ingrese los datos solicitados " << endl;
-		cout << "C�digo IATA origen: "; cin >> iataorigen; cout << "" << endl;
-		cout << "C�digo IATA destino: "; cin >> iatadestino; cout << "" << endl;
-		cout << "Ahora ingrese el tipo de combinaci�n " << endl;
-		cout << "1 _ M�s econ�mica." << endl;
+		cout << "Código IATA origen: "; cin >> iataorigen; cout << "" << endl;
+		cout << "Código IATA destino: "; cin >> iatadestino; cout << "" << endl;
+		cout << "Ahora ingrese el tipo de combinación " << endl;
+		cout << "1 _ Más económica." << endl;
 		cout << "2 _ Menor tiempo." << endl;
 		cin >> opcion;
 		aguardar();
@@ -172,7 +171,7 @@ void Controlador::salir() {
 	try {
 		generarEspacio();
 		cout << "***********************************************************************************" << endl;
-		cout << "******************** LA APLICACI�N SE CERRARA, HASTA LUEGO!! **********************" << endl;
+		cout << "******************** LA APLICACIÓN SE CERRARA, HASTA LUEGO!! **********************" << endl;
 		cout << "***********************************************************************************" << endl;
 		Sleep(3000);
 	}
@@ -184,7 +183,7 @@ void Controlador::error() {
 	try {
 		cout << "" << endl;
 		cout << "" << endl;
-		cout << "************************ OPCI�N ELEGIDA INCORRECTA **************************" << endl;
+		cout << "************************ OPCIÓN ELEGIDA INCORRECTA **************************" << endl;
 		cout << "*************************** Vuelva a intentarlo *****************************" << endl;
 		cout << "*****************************************************************************" << endl;
 		Sleep(5000);
@@ -201,9 +200,25 @@ void Controlador::aguardar() {
 	cout << "Aguarde un momento";
 	for (int i = 0; i < 5; i++) {
 		cout << ".";
-		Sleep(1000);
+		Sleep(500);
 	}
 	cout << endl;
 }
-
+void Controlador::mostrarAeropuerto(Aeropuerto aeropuerto){
+    cout << "Codigo IATA: " << aeropuerto.getCodigoIATA()<< endl;
+    cout << "Nombre: " << aeropuerto.getNombre()<< endl;
+    cout << "Ciudad: " << aeropuerto.getCiudad()<< endl;
+    cout << "Pais: " << aeropuerto.getPais()<< endl;
+    cout << "Superficie: " << aeropuerto.getSuperficie()<< endl;
+    cout << "Cantidad de terminales: " << aeropuerto.getCantidadTerminales()<< endl;
+    cout << "Destinos Nacionales: " << aeropuerto.getDestinosNacionales()<< endl;
+    cout << "Destinos Internacionales: " << aeropuerto.getDestinosInternacionales()<< endl;
+    cout << "Sus vuelos son: " << endl;
+    for(const auto& vuelo : aeropuerto.getVuelos()){
+//                 vuelo.getAeropuertoPartida()
+//                cout << "- Origen: " << vuelo.getAeropuertoPartida()->getNombre() << " - Destino: " << vuelo.getAeropuertoDestino()->getNombre() << " - Costo: $" << vuelo.getCostoVuelo() << " - Tiempo de vuelo estimado: "<< vuelo.getTiempoVuelo() << endl;
+        cout << vuelo.toString();
+    }
+    cout << " " << endl;
+}
 Controlador::Controlador() {}

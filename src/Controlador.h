@@ -38,6 +38,7 @@ public:
     void salir();
     void error();
     void aguardar();
+    void mostrarAeropuerto(Aeropuerto aeropuerto);
     
 };
 
