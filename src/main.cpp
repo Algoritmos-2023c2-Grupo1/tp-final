@@ -4,12 +4,17 @@
 #include <fstream>
 #include "Graph.h"
 #include "Aeropuerto.h"
+#include "Menu.h"
+#include"Hash.h"
 
 using namespace std;
 
 int main() {
+    setlocale(LC_ALL, "spanish");
     // TODO: Esto se haria en Aplicacion
-    auto *grafo = new Graph();
+    Graph *grafo = new Graph();
+
+    Hash<Aeropuerto> aeropuertos(5);
 
     // TODO: Pasar esta logica a LectorArchivos, puede retornar la lista de aeropuertos, o el lector puede ver el grafo y el codigo quedaria casi igual
     ifstream file1("../resources/aeropuertos.txt");
@@ -26,6 +31,7 @@ int main() {
                  >> destInternacionales) {
         auto *aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, terminales, destNacionales,
                                           destInternacionales);
+        aeropuertos.insertar(iata, *aeropuerto);
         grafo->addAeropuerto(aeropuerto);
     }
 
@@ -44,20 +50,9 @@ int main() {
     }
     file2.close();
 
-    grafo->showlist();
+    Menu menu = Menu(grafo);
 
-    list<Vuelo> rutaMasCorta = grafo->buscarRutaMasCortaEnTiempo("ICN", "SYD");
-
-    for (Vuelo vuelo: rutaMasCorta) {
-        cout << "vuelo => " << vuelo.toString() << endl;
-    }
-
-    list<Vuelo> rutaMasEconomica = grafo->buscarRutaMasEconomica("ICN", "SYD");
-
-    for (Vuelo vuelo: rutaMasEconomica) {
-        cout << "vuelo => " << vuelo.toString() << endl;
-    }
-
+    menu.start();
 
     return 0;
 }

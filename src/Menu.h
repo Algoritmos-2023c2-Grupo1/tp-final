@@ -11,7 +11,7 @@ using namespace std;
 // consultar por un aeropuerto en particular
 // dar de alta un nuevo aeropuerto
 // dar de baja a alguno
-// mostrar todos los aeropuertos(ordenados por código IATA)
+// mostrar todos los aeropuertos(ordenados por codigo IATA)
 // eleccion de camino minimo
 
 
@@ -24,6 +24,7 @@ class Menu {
 
     public:
         Menu();
+        Menu(Graph *graph);
         void start();
         void getSaludo();
         void getOpciones();

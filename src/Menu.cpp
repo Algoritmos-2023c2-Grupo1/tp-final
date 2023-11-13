@@ -1,16 +1,15 @@
-
 #include "Menu.h"
 
 // consultar por un aeropuerto en particular
 // dar de alta un nuevo aeropuerto
 // dar de baja a alguno
-// mostrar todos los aeropuertos(ordenados por código IATA)
+// mostrar todos los aeropuertos(ordenados por codigo IATA)
 // eleccion de camino minimo
 
-Menu::Menu() {
+Menu::Menu(Graph *graph) {
     opcion = 0;
-    opciones = { "1. Consultar por un aeropuerto.", "2. Alta un nuevo aeropuerto", "3. Baja de un aeropuerto", "4. Mostrar todos los aeropuertos", "5. Elejir mejor opción de viaje", "6. Salir" };
-    controlador = Controlador();
+    opciones = { "1. Consultar por un aeropuerto.", "2. Alta un nuevo aeropuerto", "3. Baja de un aeropuerto", "4. Mostrar todos los aeropuertos", "5. Elegir mejor opcion de viaje", "6. Salir" };
+    controlador = Controlador(graph);
 }
 
 void Menu::start() {
@@ -28,7 +27,7 @@ void Menu::getOpciones() {
 
             cout << this->opciones[i] << endl;
         }
-        cout << "Opción: "; cin >> opcionelegida;
+        cout << "Opcion: "; cin >> opcionelegida;
         this->setOpcion(opcionelegida);
     }
     catch (int n) {
