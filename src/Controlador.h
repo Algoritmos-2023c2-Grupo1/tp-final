@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Graph.h"
 
 using namespace std;
 
@@ -11,16 +12,20 @@ using namespace std;
 // consultar por un aeropuerto en particular
 // dar de alta un nuevo aeropuerto
 // dar de baja a alguno
-// mostrar todos los aeropuertos(ordenados por código IATA)
+// mostrar todos los aeropuertos(ordenados por codigo IATA)
 // eleccion de camino minimo
 
 
 class Controlador {
 
 private:
-
+    Graph *grafo;
 
 public:
+    Controlador(Graph *grafo);
+
+    Controlador();
+
     void saludo();
     void continuarOpciones();
     void cargaDatosError();
@@ -33,6 +38,7 @@ public:
     void salir();
     void error();
     void aguardar();
+    void mostrarAeropuerto(Aeropuerto *aeropuerto);
     
 };
 

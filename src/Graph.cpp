@@ -59,7 +59,7 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
     optional<Aeropuerto *> destino = getAeropuerto(codigoIATADestino);
 
     if (!origen.has_value() || !destino.has_value()) {
-        cout << "Aeropuerto de partida o destino no existe" << endl;
+//        cout << "Aeropuerto de partida o destino no existe" << endl;
         return {};
     }
 
@@ -78,28 +78,28 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
 
     // Agrega el aeropuerto de partida a la cola de prioridad
     colaPrioridad.push({0, origen.value()});
-    cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
+//    cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
 
     while (!colaPrioridad.empty()) {
         Aeropuerto *aeropuertoActual = colaPrioridad.top().second;
         colaPrioridad.pop();
         if (aeropuertoActual == destino.value()) {
-            cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
-                 << " reconstruyendo ruta..."
-                 << endl;
+//            cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
+//                 << " reconstruyendo ruta..."
+//                 << endl;
             std::list<Vuelo> ruta;
             Aeropuerto *aeropuerto = destino.value();
 
             while (aeropuerto != origen.value()) {
-                cout << "Agregando vuelo " << vuelosPrevios[aeropuerto].toString() << " a la ruta mas económica " << vuelosPrevios[aeropuerto].getCostoVuelo() << endl;
+                // cout << "Agregando vuelo " << vuelosPrevios[aeropuerto].toString() << " a la ruta mas económica " << vuelosPrevios[aeropuerto].getCostoVuelo() << endl;
 
                 ruta.push_front(vuelosPrevios[aeropuerto]);
                 aeropuerto = getAeropuerto(vuelosPrevios[aeropuerto].getCodigoIATAPartida()).value();
             }
 
-            cout << "Ruta más económica " << origen.value()->getCodigoIATA() << " a "
-                 << destino.value()->getCodigoIATA() << " con Costo: USD $" << costoDesdeOrigen[destino.value()]
-                 << endl;
+//            cout << "Ruta más económica " << origen.value()->getCodigoIATA() << " a "
+//                 << destino.value()->getCodigoIATA() << " con Costo: USD $" << costoDesdeOrigen[destino.value()]
+//                 << endl;
 
             return ruta;
         }
@@ -120,8 +120,8 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
         }
     }
 
-    cout << "No se encontró una ruta desde " << origen.value()->getCodigoIATA() << " a "
-         << destino.value()->getCodigoIATA() << endl;
+//    cout << "No se encontró una ruta desde " << origen.value()->getCodigoIATA() << " a "
+//         << destino.value()->getCodigoIATA() << endl;
     return {};
 }
 
@@ -137,7 +137,7 @@ list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const string &codigoIATAPartida, c
     optional<Aeropuerto *> destino = getAeropuerto(codigoIATADestino);
 
     if (!origen.has_value() || !destino.has_value()) {
-        cout << "Aeropuerto de partida o destino no existe" << endl;
+        // cout << "Aeropuerto de partida o destino no existe" << endl;
         return {};
     }
 
@@ -156,28 +156,29 @@ list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const string &codigoIATAPartida, c
 
     // Agrega el aeropuerto de partida a la cola de prioridad
     colaPrioridad.push({0, origen.value()});
-    cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
+    // cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
 
     while (!colaPrioridad.empty()) {
         Aeropuerto *aeropuertoActual = colaPrioridad.top().second;
         colaPrioridad.pop();
         if (aeropuertoActual == destino.value()) {
-            cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
-                 << " reconstruyendo ruta..."
-                 << endl;
+//            cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
+//                 << " reconstruyendo ruta..."
+//                 << endl;
+            // TODO: Usar referencias
             std::list<Vuelo> ruta;
             Aeropuerto *aeropuerto = destino.value();
 
             while (aeropuerto != origen.value()) {
-                cout << "Agregando vuelo " << vuelosPrevios[aeropuerto].toString() << " a la ruta mas corta con duración " << vuelosPrevios[aeropuerto].getHorasVuelo() << endl;
+                // cout << "Agregando vuelo " << vuelosPrevios[aeropuerto].toString() << " a la ruta mas corta con duración " << vuelosPrevios[aeropuerto].getHorasVuelo() << endl;
 
                 ruta.push_front(vuelosPrevios[aeropuerto]);
                 aeropuerto = getAeropuerto(vuelosPrevios[aeropuerto].getCodigoIATAPartida()).value();
             }
 
-            cout << "Ruta más corta en tiempo desde " << origen.value()->getCodigoIATA() << " a "
-                 << destino.value()->getCodigoIATA() << " (Tiempo: " << tiempoDesdeOrigen[destino.value()] << " horas)"
-                 << endl;
+//            cout << "Ruta más corta en tiempo desde " << origen.value()->getCodigoIATA() << " a "
+//                 << destino.value()->getCodigoIATA() << " (Tiempo: " << tiempoDesdeOrigen[destino.value()] << " horas)"
+//                 << endl;
 
             return ruta;
         }

@@ -14,7 +14,10 @@ add_executable(tp_final
         src/Graph.cpp
         src/Graph.h
         src/MenuPrincipal.h
-        src/Cola.h
         src/Aplicacion.h
-        src/Pila.h
+        src/Menu.cpp
+        src/Menu.h
+        src/Controlador.cpp
+        src/Controlador.h
+        src/Hash.h
 )
