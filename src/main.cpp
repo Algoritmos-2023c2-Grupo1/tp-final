@@ -9,7 +9,7 @@ using namespace std;
 
 int main() {
     // TODO: Esto se haria en Aplicacion
-    Graph *grafo = new Graph();
+    auto *grafo = new Graph();
 
     // TODO: Pasar esta logica a LectorArchivos, puede retornar la lista de aeropuertos, o el lector puede ver el grafo y el codigo quedaria casi igual
     ifstream file1("../resources/aeropuertos.txt");
@@ -42,17 +42,22 @@ int main() {
         auto *vuelo = new Vuelo(origen, destino, costo_vuelo, tiempo_vuelo);
         grafo->agregarVueloAAeropuerto(origen, vuelo);
     }
+    file2.close();
 
     grafo->showlist();
 
+    list<Vuelo> rutaMasCorta = grafo->buscarRutaMasCortaEnTiempo("ICN", "SYD");
 
-    list<Vuelo *> rutaMasCorta = grafo->buscarRutaMasCortaEnTiempo("EZE", "HKG");
-
-    for (Vuelo *vuelo: rutaMasCorta) {
-        cout << "vuelo => " << vuelo->getCodigoIATAPartida() << " -> " << vuelo->getCodigoIATADestino() << endl;
+    for (Vuelo vuelo: rutaMasCorta) {
+        cout << "vuelo => " << vuelo.toString() << endl;
     }
 
-    file2.close();
+    list<Vuelo> rutaMasEconomica = grafo->buscarRutaMasEconomica("ICN", "SYD");
+
+    for (Vuelo vuelo: rutaMasEconomica) {
+        cout << "vuelo => " << vuelo.toString() << endl;
+    }
+
 
     return 0;
 }
