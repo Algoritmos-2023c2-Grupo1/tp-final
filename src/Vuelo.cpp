@@ -46,16 +46,12 @@ string Vuelo::getTiempoVuelo() const {
             to_string((unsigned int)(60 * (horasVuelo - (unsigned int)horasVuelo)));
 }
 
-Aeropuerto* Vuelo::getAeropuertoPartida() const {
-    return aeropuertoPartida;
-}
-
-Aeropuerto* Vuelo::getAeropuertoDestino() const {
-    return aeropuertoDestino;
-}
-
 string Vuelo::toString() const {
     return "Vuelo [" + codigoIATAPartida + " a " + 
                     codigoIATADestino + " (" + getTiempoVuelo()+
                     ") USD" + to_string(getCostoVuelo()) + "]";           
+}
+
+Vuelo::Vuelo() {
+
 }

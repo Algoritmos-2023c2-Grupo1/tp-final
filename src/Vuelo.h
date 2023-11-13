@@ -5,6 +5,7 @@
 #include "Aeropuerto.h"
 
 using namespace std;
+
 class Aeropuerto;
 
 class Vuelo {
@@ -39,11 +40,10 @@ public:
 
     string getTiempoVuelo() const;
 
-    Aeropuerto *getAeropuertoPartida() const;
-
-    Aeropuerto *getAeropuertoDestino() const;
 
     string toString() const;
+
+    Vuelo();
 };
 
 
