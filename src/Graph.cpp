@@ -38,6 +38,7 @@ void Graph::showlist() {
 }
 
 optional<Aeropuerto *> Graph::getAeropuerto(string iata) {
+    //TODO: Usar tabla de hashing?
     for (Aeropuerto *aeropuerto: aeropuertos) {
         if (aeropuerto->getCodigoIATA() == iata) {
             return aeropuerto;
@@ -104,14 +105,17 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
         }
 
         for (const Vuelo *vuelo: aeropuertoActual->getVuelos()) {
+            // TODO: Usar tabla de hashing?
             Aeropuerto *aeropuertoDestino = getAeropuerto(vuelo->getCodigoIATADestino()).value();
-            float tiempoHastaDestino = costoDesdeOrigen[aeropuertoActual] + vuelo->getCostoVuelo();
+            // Se guarda el costo acumulado + costo vuelo actual
+            float costoHastaDestino = costoDesdeOrigen[aeropuertoActual] + vuelo->getCostoVuelo();
 
-            if (tiempoHastaDestino < costoDesdeOrigen[aeropuertoDestino]) {
-                // Encontramos un camino más corto en tiempo
-                costoDesdeOrigen[aeropuertoDestino] = tiempoHastaDestino;
+            // Verifica si hay otro camino minimo
+            if (costoHastaDestino < costoDesdeOrigen[aeropuertoDestino]) {
+                // Encontramos un camino minimo
+                costoDesdeOrigen[aeropuertoDestino] = costoHastaDestino;
                 vuelosPrevios[aeropuertoDestino] = *vuelo;
-                colaPrioridad.push({tiempoHastaDestino, aeropuertoDestino});
+                colaPrioridad.push({costoHastaDestino, aeropuertoDestino});
             }
         }
     }
