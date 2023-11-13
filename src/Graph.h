@@ -20,9 +20,9 @@ public:
 
     std::optional<Aeropuerto *> getAeropuerto(string iata);
 
-    list<Vuelo*> buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
+    list<Vuelo> buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
 
-    list<Vuelo*> buscarRutaMasCortaEnTiempo(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
+    list<Vuelo> buscarRutaMasCortaEnTiempo(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
 
 private:
     int getMinDistanceIndex(const std::vector<float> &distancias, const std::vector<bool> &visitado);
