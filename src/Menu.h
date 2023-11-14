@@ -23,7 +23,6 @@ class Menu {
         Controlador controlador;
 
     public:
-        Menu();
         Menu(Graph *graph);
         void start();
         void getSaludo();

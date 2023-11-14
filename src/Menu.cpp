@@ -13,6 +13,7 @@ Menu::Menu(Graph *graph) {
 }
 
 void Menu::start() {
+    setlocale(LC_ALL, "spanish");
 	this->getSaludo();
 	this->getOpciones();
 };

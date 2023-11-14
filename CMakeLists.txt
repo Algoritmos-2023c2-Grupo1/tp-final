@@ -13,11 +13,12 @@ add_executable(tp_final
         src/main.cpp
         src/Graph.cpp
         src/Graph.h
-        src/MenuPrincipal.h
         src/Aplicacion.h
         src/Menu.cpp
         src/Menu.h
         src/Controlador.cpp
         src/Controlador.h
         src/Hash.h
+        src/LectorArchivos.h
+        src/LectorArchivos.cpp
 )

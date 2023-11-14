@@ -4,14 +4,16 @@
 #include <string>
 #include "Aeropuerto.h"
 #include "Vuelo.h"
+#include "Hash.h"
+#include "Graph.h"
 
 using namespace std;
 
 class LectorArchivos {
 public:
-    static vector<Aeropuerto> obtenerAeropuertosDesdeArchivo();
+    static void obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto> *aeropuertos, Graph *grafo);
 
-    static vector<Vuelo> obtenerVuelosDesdeArchivo();
+    static void obtenerVuelosDesdeArchivo(Hash<Aeropuerto> *aeropuertos, Graph *grafo);
 
 private:
 
