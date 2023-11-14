@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void LectorArchivos::obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto> *aeropuertos, Graph *grafo) {
+void LectorArchivos::obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo) {
     ifstream file1("../resources/aeropuertos.txt");
     string iata;
     string nombre;
@@ -21,15 +21,13 @@ void LectorArchivos::obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto> *aeropuerto
                  >> destInternacionales) {
         auto *aeropuerto = new Aeropuerto(iata, nombre, ciudad, pais, superficie, terminales, destNacionales,
                                           destInternacionales);
-        aeropuertos->insertar(iata, *aeropuerto);
         grafo->addAeropuerto(aeropuerto);
     }
 
     file1.close();
 }
 
-void LectorArchivos::obtenerVuelosDesdeArchivo(Hash<Aeropuerto> *aeropuertos, Graph *grafo) {
-    // TODO: Pasar esta logica a LectorArchivos, puede retornar la lista de vuelos, o el lector puede ver el grafo y el codigo quedaria casi igual
+void LectorArchivos::obtenerVuelosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo) {
     ifstream file2("../resources/vuelos.txt");
 
     string origen;

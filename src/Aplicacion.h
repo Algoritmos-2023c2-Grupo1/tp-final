@@ -15,9 +15,9 @@ public:
 };
 
 void Aplicacion::ejecutar() {
-    Hash<Aeropuerto> *aeropuertos = new Hash<Aeropuerto>(5);
-    Graph *grafo = new Graph(); // TODO: Usar hash en grafo
-    Menu *menu = new Menu(grafo);
+    auto *aeropuertos = new Hash<Aeropuerto*>(5);
+    auto *grafo = new Graph(aeropuertos); // TODO: Usar hash en grafo
+    auto *menu = new Menu(grafo);
 
     LectorArchivos::obtenerAeropuertosDesdeArchivo(aeropuertos, grafo);
     LectorArchivos::obtenerVuelosDesdeArchivo(aeropuertos, grafo);

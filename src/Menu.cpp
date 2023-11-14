@@ -67,7 +67,6 @@ void Menu::realizarTarea() {
         case 6:
             controlador.salir();
             exit(0);
-            break;
         default:
             controlador.error();
             this->getOpciones();

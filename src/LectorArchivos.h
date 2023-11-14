@@ -1,3 +1,4 @@
+ //TP_FINAL_LECTORARCHIVOS_H
 #ifndef TP_FINAL_LECTORARCHIVOS_H
 #define TP_FINAL_LECTORARCHIVOS_H
 
@@ -11,13 +12,10 @@ using namespace std;
 
 class LectorArchivos {
 public:
-    static void obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto> *aeropuertos, Graph *grafo);
+    static void obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo);
 
-    static void obtenerVuelosDesdeArchivo(Hash<Aeropuerto> *aeropuertos, Graph *grafo);
-
-private:
-
+    static void obtenerVuelosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo);
 };
 
 
-#endif //TP_FINAL_LECTORARCHIVOS_H
+#endif
