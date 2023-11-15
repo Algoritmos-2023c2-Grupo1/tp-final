@@ -55,6 +55,7 @@ private:
     }
 
 public:
+    // clases: en cuantos espacios se divide
     Hash(int clases) {
         this->modulo = clases;
         this->lista = new NodoH<T> *[this->modulo];
