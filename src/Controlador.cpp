@@ -104,9 +104,9 @@ void Controlador::alta() {
         cin >> dest_internacionales;
         cout << "" << endl;
 
-        //Aca se envian los datos al manejador para que lo agregue.
+        // TODO: Aca se envian los datos al manejador para que lo agregue.
         // y se avisa que la tarea salio satisfactoria.
-        //
+
         aguardar();
     }
     catch (int n) {
@@ -126,7 +126,7 @@ void Controlador::baja() {
         cin >> iata;
         cout << "" << endl;
 
-        // Aca se manda el codigo IATA al manejador de aeropuertos para que devuelva el aeropuerto.
+        // TODO: Aca se manda el codigo IATA al manejador de aeropuertos para que devuelva el aeropuerto.
         // Se muestran los datos del aeropuerto y se pregunta si quiere continuar.
         aguardar();
         // Si pone que Si se da de baja

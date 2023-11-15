@@ -9,27 +9,23 @@
 using namespace std;
 
 void Graph::addAeropuerto(Aeropuerto *aeropuerto) {
-    aeropuertos.push_back(aeropuerto);
+    aeropuertos->insertar(aeropuerto->getCodigoIATA(), aeropuerto);
 }
 
 list<Aeropuerto *> Graph::getAeropuertos() {
-    return aeropuertos;
+    return aeropuertos->listar();
 }
 
 string Graph::toString() {
-    return "Graph [aeropuertos=" + to_string(aeropuertos.size()) + "]";
+    return "Graph [aeropuertos=" + to_string(aeropuertos->size()) + "]";
 }
 
 void Graph::agregarVueloAAeropuerto(string iata, Vuelo *vuelo) {
-    for (Aeropuerto *aeropuerto: aeropuertos) {
-        if (aeropuerto->getCodigoIATA() == iata) {
-            aeropuerto->addVuelo(vuelo);
-        }
-    }
+    aeropuertos->buscar(iata)->addVuelo(vuelo);
 }
 
 void Graph::showlist() {
-    for (Aeropuerto *aeropuerto: aeropuertos) {
+    for (Aeropuerto *aeropuerto: aeropuertos->listar()) {
         cout << aeropuerto->toString();
         for (const auto &vuelo: aeropuerto->getVuelos()) {
             cout << vuelo->toString() << endl;
@@ -38,13 +34,7 @@ void Graph::showlist() {
 }
 
 optional<Aeropuerto *> Graph::getAeropuerto(string iata) {
-    //TODO: Usar tabla de hashing?
-    for (Aeropuerto *aeropuerto: aeropuertos) {
-        if (aeropuerto->getCodigoIATA() == iata) {
-            return aeropuerto;
-        }
-    }
-    return {};
+    return aeropuertos->buscar(iata);
 };
 
 /*
@@ -54,12 +44,13 @@ optional<Aeropuerto *> Graph::getAeropuerto(string iata) {
  * Se utiliza el algoritmo de Dijkstra para encontrar la ruta más económica desde el aeropuerto de partida hasta el aeropuerto de destino.
  * Se reconstruye la ruta más económica y se imprime el resultado.
  */
-std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::string &codigoIATADestino) {
+std::list<Vuelo>
+Graph::buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::string &codigoIATADestino) {
     optional<Aeropuerto *> origen = getAeropuerto(codigoIATAPartida);
     optional<Aeropuerto *> destino = getAeropuerto(codigoIATADestino);
 
     if (!origen.has_value() || !destino.has_value()) {
-//        cout << "Aeropuerto de partida o destino no existe" << endl;
+        // cout << "Aeropuerto de partida o destino no existe" << endl;
         return {};
     }
 
@@ -69,7 +60,7 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
     std::priority_queue<std::pair<float, Aeropuerto *>, std::vector<std::pair<float, Aeropuerto *>>, std::greater<>> colaPrioridad;
 
     // Inicializa el tiempo desde el origen como infinito para todos los aeropuertos
-    for (Aeropuerto *aeropuerto: aeropuertos) {
+    for (Aeropuerto *aeropuerto: aeropuertos->listar()) {
         costoDesdeOrigen[aeropuerto] = INT_MAX;
     }
 
@@ -78,15 +69,15 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
 
     // Agrega el aeropuerto de partida a la cola de prioridad
     colaPrioridad.push({0, origen.value()});
-//    cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
+    // cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
 
     while (!colaPrioridad.empty()) {
         Aeropuerto *aeropuertoActual = colaPrioridad.top().second;
         colaPrioridad.pop();
         if (aeropuertoActual == destino.value()) {
-//            cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
-//                 << " reconstruyendo ruta..."
-//                 << endl;
+            // cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
+            //     << " reconstruyendo ruta..."
+            //     << endl;
             std::list<Vuelo> ruta;
             Aeropuerto *aeropuerto = destino.value();
 
@@ -105,7 +96,6 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
         }
 
         for (const Vuelo *vuelo: aeropuertoActual->getVuelos()) {
-            // TODO: Usar tabla de hashing?
             Aeropuerto *aeropuertoDestino = getAeropuerto(vuelo->getCodigoIATADestino()).value();
             // Se guarda el costo acumulado + costo vuelo actual
             float costoHastaDestino = costoDesdeOrigen[aeropuertoActual] + vuelo->getCostoVuelo();
@@ -120,8 +110,8 @@ std::list<Vuelo> Graph::buscarRutaMasEconomica(const std::string &codigoIATAPart
         }
     }
 
-//    cout << "No se encontró una ruta desde " << origen.value()->getCodigoIATA() << " a "
-//         << destino.value()->getCodigoIATA() << endl;
+    //    cout << "No se encontró una ruta desde " << origen.value()->getCodigoIATA() << " a "
+    //         << destino.value()->getCodigoIATA() << endl;
     return {};
 }
 
@@ -147,7 +137,7 @@ list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const string &codigoIATAPartida, c
     std::priority_queue<std::pair<float, Aeropuerto *>, std::vector<std::pair<float, Aeropuerto *>>, std::greater<>> colaPrioridad;
 
     // Inicializa el tiempo desde el origen como infinito para todos los aeropuertos
-    for (Aeropuerto *aeropuerto: aeropuertos) {
+    for (Aeropuerto *aeropuerto: aeropuertos->listar()) {
         tiempoDesdeOrigen[aeropuerto] = INT_MAX;
     }
 
@@ -199,4 +189,8 @@ list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const string &codigoIATAPartida, c
     cout << "No se encontró una ruta desde " << origen.value()->getCodigoIATA() << " a "
          << destino.value()->getCodigoIATA() << endl;
     return {};
+}
+
+Graph::Graph(Hash<Aeropuerto *> *aeropuertos) {
+    this->aeropuertos = aeropuertos;
 }
