@@ -1,21 +1,21 @@
+ //TP_FINAL_LECTORARCHIVOS_H
 #ifndef TP_FINAL_LECTORARCHIVOS_H
 #define TP_FINAL_LECTORARCHIVOS_H
 
 #include <string>
 #include "Aeropuerto.h"
 #include "Vuelo.h"
+#include "Hash.h"
+#include "Graph.h"
 
 using namespace std;
 
 class LectorArchivos {
 public:
-    static vector<Aeropuerto> obtenerAeropuertosDesdeArchivo();
+    static void obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo);
 
-    static vector<Vuelo> obtenerVuelosDesdeArchivo();
-
-private:
-
+    static void obtenerVuelosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo);
 };
 
 
-#endif //TP_FINAL_LECTORARCHIVOS_H
+#endif

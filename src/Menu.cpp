@@ -13,6 +13,7 @@ Menu::Menu(Graph *graph) {
 }
 
 void Menu::start() {
+    setlocale(LC_ALL, "spanish");
 	this->getSaludo();
 	this->getOpciones();
 };
@@ -66,7 +67,6 @@ void Menu::realizarTarea() {
         case 6:
             controlador.salir();
             exit(0);
-            break;
         default:
             controlador.error();
             this->getOpciones();

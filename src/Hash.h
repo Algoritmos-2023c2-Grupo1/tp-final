@@ -7,12 +7,11 @@ using namespace std;
 
 
 //------------------------------
-template <typename T>
+template<typename T>
 class Hash;
 
-template <typename T>
-class NodoH
-{
+template<typename T>
+class NodoH {
 private:
     string clave;
     T valor;
@@ -24,18 +23,15 @@ public:
     NodoH(string clave, T valor) : clave(clave), valor(valor), siguiente(NULL) {
     }
 
-    NodoH(NodoH &obj)
-    {
+    NodoH(NodoH &obj) {
         this->clave = obj.clave;
         this->valor = obj.valor;
         this->siguiente = NULL;
     }
 
-    ~NodoH()
-    {
+    ~NodoH() {
         NodoH *inicio = this;
-        while (inicio != NULL)
-        {
+        while (inicio != NULL) {
             NodoH *actual = inicio;
             inicio = inicio->siguiente;
             delete actual;
@@ -43,15 +39,13 @@ public:
     }
 };
 
-template <typename T>
-class Hash
-{
+template<typename T>
+class Hash {
 private:
     int modulo;
     NodoH<T> **lista;
 
-    int funcionHash(string clave)
-    {
+    int funcionHash(string clave) {
         unsigned long n = 0;
 
         for (int i = 0; clave[i]; i++)
@@ -61,15 +55,13 @@ private:
     }
 
 public:
-    Hash(int clases)
-    {
+    Hash(int clases) {
         this->modulo = clases;
         this->lista = new NodoH<T> *[this->modulo];
         this->lista[0] = NULL;
     }
 
-    void insertar(string clave, T valor)
-    {
+    void insertar(string clave, T valor) {
         int clase = this->funcionHash(clave);
         NodoH<T> *nuevo = new NodoH<T>(clave, valor);
 
@@ -79,66 +71,32 @@ public:
         this->lista[clase] = nuevo;
     }
 
-    T buscar(string clave)
-    {
+    T buscar(string clave) {
         int clase = this->funcionHash(clave);
         NodoH<T> *nodo = this->lista[clase];
-        while (nodo != NULL)
-        {
+        while (nodo != NULL) {
             if (nodo->clave == clave)
                 return nodo->valor;
             nodo = nodo->siguiente;
         }
         return T();
     }
-};
 
-//------------------------------
-
-/*template<class T>
-class Hash {
-private:
-    int tamanio;
-    Lista<T> *tabla;
-public:
-    Hash(int size) {
-        tamanio = size;
-        tabla = new Lista<T>[tamanio];
-    }
-
-    void insertItem(int key, T item) {
-        int index = hashFunction(key);
-        tabla[index]->alta(item, 1);
-    }
-
-    void deleteItem(int key) {
-
-    }
-
-    int hashFunction(int key) {
-        return (key % tamanio);
-    }
-
-    void display() {
-        for (int i = 0; i < tamanio; i++) {
-            cout << i;
-            tabla[i].mostrar();
-            *//*
-            for (int j=1; j < tabla[i].getLargo()+1; j++)
-                cout << " --> " << tabla[i].consulta(j)->getDni();
-            *//*
-            cout << endl;
+    list<T> listar() {
+        list<T> valores;
+        for (int i = 0; i < this->modulo; ++i) {
+            NodoH<T> *nodo = this->lista[i];
+            while (nodo != nullptr) {
+                valores.push_back(nodo->valor);
+                nodo = nodo->siguiente;
+            }
         }
+        return valores;
     }
 
-    void setItem(int i, Lista<T> *item) {
-        tabla[i] = *item;
+    int size() {
+        return modulo;
     }
-
-    T *getItem(int i) {
-        return &tabla[i];
-    }
-
-};*/
+};
 
 #endif //TP_FINAL_HASH_H
