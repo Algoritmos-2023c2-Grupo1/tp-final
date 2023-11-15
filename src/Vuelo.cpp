@@ -49,7 +49,7 @@ string Vuelo::getTiempoVuelo() const {
 string Vuelo::toString() const {
     return "Vuelo [" + codigoIATAPartida + " a " +
            codigoIATADestino + " con duración " + getTiempoVuelo() +
-           " con valor USD $ " + to_string(getCostoVuelo()) + "]";
+           " con valor USD " + to_string(getCostoVuelo()) + "]";
 }
 
 Vuelo::Vuelo() {

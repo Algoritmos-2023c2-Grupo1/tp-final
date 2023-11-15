@@ -2,6 +2,9 @@
 #define TP_FINAL_GRAPH_H
 
 #include "Aeropuerto.h"
+#include <vector>
+#include <optional>
+#include "Hash.h"
 
 class Graph {
 private:
@@ -23,13 +26,6 @@ public:
     list<Vuelo> buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
 
     list<Vuelo> buscarRutaMasCortaEnTiempo(const std::string &codigoIATAPartida, const std::string &codigoIATADestino);
-
-private:
-    int getMinDistanceIndex(const std::vector<float> &distancias, const std::vector<bool> &visitado);
-
-    int getAeropuertoIndex(Aeropuerto *aeropuerto);
-
-    Aeropuerto getAeropuertoByIndex(int aeropuertoIdx);
 };
 
 #endif //TP_FINAL_GRAPH_H
