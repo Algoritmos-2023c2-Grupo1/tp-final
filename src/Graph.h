@@ -2,6 +2,8 @@
 #define TP_FINAL_GRAPH_H
 
 #include "Aeropuerto.h"
+#include <vector>
+#include <optional>
 #include "Hash.h"
 
 class Graph {

@@ -1,6 +1,7 @@
 #include <limits>
 #include <iostream>
 #include <algorithm>
+#include <cmath>
 #include "Controlador.h"
 
 Controlador::Controlador(Graph *_grafo) {
@@ -166,9 +167,11 @@ void Controlador::caminoMinimo() {
         cout << "Ingrese los datos solicitados " << endl;
         cout << "Código IATA origen: ";
         cin >> iataorigen;
+        transform(iataorigen.begin(), iataorigen.end(), iataorigen.begin(), ::toupper);
         cout << "" << endl;
         cout << "Código IATA destino: ";
         cin >> iatadestino;
+        transform(iatadestino.begin(), iatadestino.end(), iatadestino.begin(), ::toupper);
         cout << "" << endl;
         cout << "Ahora ingrese el tipo de combinación " << endl;
         cout << "1 _ Más económica." << endl;
@@ -186,10 +189,21 @@ void Controlador::caminoMinimo() {
         if (ruta.empty()){
             cout << "No hay combinaciones posibles desde " << iataorigen << " hasta " << iatadestino << endl;
         } else {
+            float costoTotal = 0;
+            float tiempoTotal= 0;
+            int nrovuelo = 1;
             cout << "Combinacion de vuelos mas cortos en tiempo desde " << iataorigen << " hasta " << iatadestino << endl;
             for (const Vuelo& vuelo: ruta) {
-                cout << vuelo.toString() << endl;
+                cout << nrovuelo << "° vuelo: ";
+                nrovuelo++;
+                costoTotal = costoTotal + vuelo.getCostoVuelo();
+                tiempoTotal = tiempoTotal + vuelo.getHorasVuelo();
+                //cout << vuelo.toString() << endl;
+                cout << vuelo.getCodigoIATAPartida() << " - " << vuelo.getCodigoIATADestino() << " - " << ((opcion == 1 )? "USD "+to_string((int)round(vuelo.getCostoVuelo())) + ".":  vuelo.getTiempoVuelo()+ " Hs.") << endl;
             }
+            string horasTotales = to_string((unsigned int)tiempoTotal) + ':' +
+            to_string((unsigned int)(60 * (tiempoTotal - (unsigned int)tiempoTotal)));
+            cout << ((opcion == 1) ? "Costo total: USD " + to_string((int)costoTotal) : "Tiempo total: " + horasTotales + " Hs.")<< endl;
         }
 
         continuarOpciones();
