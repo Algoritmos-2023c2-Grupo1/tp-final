@@ -12,9 +12,9 @@ using namespace std;
 
 class LectorArchivos {
 public:
-    static void obtenerAeropuertosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo);
+    static void obtenerAeropuertosDesdeArchivo(Graph *grafo);
 
-    static void obtenerVuelosDesdeArchivo(Hash<Aeropuerto*> *aeropuertos, Graph *grafo);
+    static void obtenerVuelosDesdeArchivo(Graph *grafo);
 };
 
 

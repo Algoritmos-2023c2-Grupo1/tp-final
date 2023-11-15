@@ -21,7 +21,7 @@ string Graph::toString() {
 }
 
 void Graph::agregarVueloAAeropuerto(string iata, Vuelo *vuelo) {
-            aeropuertos->buscar(iata)->addVuelo(vuelo);
+    aeropuertos->buscar(iata)->addVuelo(vuelo);
 }
 
 void Graph::showlist() {
@@ -50,7 +50,7 @@ Graph::buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::s
     optional<Aeropuerto *> destino = getAeropuerto(codigoIATADestino);
 
     if (!origen.has_value() || !destino.has_value()) {
-//        cout << "Aeropuerto de partida o destino no existe" << endl;
+        // cout << "Aeropuerto de partida o destino no existe" << endl;
         return {};
     }
 
@@ -69,15 +69,15 @@ Graph::buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::s
 
     // Agrega el aeropuerto de partida a la cola de prioridad
     colaPrioridad.push({0, origen.value()});
-//    cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
+    // cout << "Agregando aeropuerto de partida a la cola de prioridad ->" << origen.value()->getCodigoIATA() << endl;
 
     while (!colaPrioridad.empty()) {
         Aeropuerto *aeropuertoActual = colaPrioridad.top().second;
         colaPrioridad.pop();
         if (aeropuertoActual == destino.value()) {
-//            cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
-//                 << " reconstruyendo ruta..."
-//                 << endl;
+            // cout << "Estamos sobre el aeropuerto destino - " << destino.value()->getCodigoIATA()
+            //     << " reconstruyendo ruta..."
+            //     << endl;
             std::list<Vuelo> ruta;
             Aeropuerto *aeropuerto = destino.value();
 
@@ -110,8 +110,8 @@ Graph::buscarRutaMasEconomica(const std::string &codigoIATAPartida, const std::s
         }
     }
 
-//    cout << "No se encontró una ruta desde " << origen.value()->getCodigoIATA() << " a "
-//         << destino.value()->getCodigoIATA() << endl;
+    //    cout << "No se encontró una ruta desde " << origen.value()->getCodigoIATA() << " a "
+    //         << destino.value()->getCodigoIATA() << endl;
     return {};
 }
 

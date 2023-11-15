@@ -16,13 +16,14 @@ public:
 
 void Aplicacion::ejecutar() {
     auto *aeropuertos = new Hash<Aeropuerto*>(5);
-    auto *grafo = new Graph(aeropuertos); // TODO: Usar hash en grafo
+    auto *grafo = new Graph(aeropuertos);
     auto *menu = new Menu(grafo);
 
-    LectorArchivos::obtenerAeropuertosDesdeArchivo(aeropuertos, grafo);
-    LectorArchivos::obtenerVuelosDesdeArchivo(aeropuertos, grafo);
+    LectorArchivos::obtenerAeropuertosDesdeArchivo(grafo);
+    LectorArchivos::obtenerVuelosDesdeArchivo(grafo);
 
     menu->start();
+//TODO: menu->clean();
 }
 
 
