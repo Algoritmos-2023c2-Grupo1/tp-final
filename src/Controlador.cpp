@@ -24,6 +24,10 @@ void Controlador::continuarOpciones() {
     generarEspacio();
     cout << "**************************** SIGAMOS TRABAJANDO *****************************" << endl;
     cout << "*****************************************************************************" << endl;
+    for (Aeropuerto *aeropuerto:this->grafo->getAeropuertos()) {
+        cout << aeropuerto->getCodigoIATA() << " ,";
+    }
+    cout << endl;
 }
 
 void Controlador::cargaDatosError() {
@@ -55,7 +59,7 @@ void Controlador::consultar() {
         transform(iata.begin(), iata.end(), iata.begin(), ::toupper);
         aguardar();
         optional<Aeropuerto *> aeropuerto = grafo->getAeropuerto(iata);
-        if (aeropuerto.has_value()) {
+        if (aeropuerto.has_value() && aeropuerto.value() != NULL) {
             generarEspacio();
             cout << "******************* Datos del aeropuerto buscado ******************" << endl;
             mostrarAeropuerto(aeropuerto.value());
@@ -108,6 +112,8 @@ void Controlador::alta() {
         // y se avisa que la tarea salio satisfactoria.
 
         aguardar();
+        auto aeropuerto = new Aeropuerto(iata,nombre, ciudad,pais, superficie,terminales,dest_nacionales,dest_internacionales);
+        grafo->addAeropuerto(aeropuerto);
     }
     catch (int n) {
         cargaDatosError();
@@ -127,7 +133,7 @@ void Controlador::baja() {
         cout << "" << endl;
 
         // TODO: Aca se manda el codigo IATA al manejador de aeropuertos para que devuelva el aeropuerto.
-        // Se muestran los datos del aeropuerto y se pregunta si quiere continuar.
+        grafo->borrarAeropuerto(iata);
         aguardar();
         // Si pone que Si se da de baja
     }

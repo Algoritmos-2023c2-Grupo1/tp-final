@@ -126,6 +126,7 @@ list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const string &codigoIATAPartida, c
     optional<Aeropuerto *> origen = getAeropuerto(codigoIATAPartida);
     optional<Aeropuerto *> destino = getAeropuerto(codigoIATADestino);
 
+<<<<<<< Updated upstream
     if (!origen.has_value() || !destino.has_value()) {
         // cout << "Aeropuerto de partida o destino no existe" << endl;
         return {};
@@ -135,6 +136,12 @@ list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const string &codigoIATAPartida, c
     std::unordered_map<Aeropuerto *, float> tiempoDesdeOrigen;
     std::unordered_map<Aeropuerto *, Vuelo> vuelosPrevios;
     std::priority_queue<std::pair<float, Aeropuerto *>, std::vector<std::pair<float, Aeropuerto *>>, std::greater<>> colaPrioridad;
+=======
+    // Funcion lambda recibe x e y devuelve x
+    auto costoCalculador = [](float costo, float tiempo) { return costo; };
+    return buscarRutaOptima(codigoIATAPartida, codigoIATADestino, costoDesdeOrigen, vuelosPrevios, costoCalculador);
+}
+>>>>>>> Stashed changes
 
     // Inicializa el tiempo desde el origen como infinito para todos los aeropuertos
     for (Aeropuerto *aeropuerto: aeropuertos->listar()) {
@@ -193,4 +200,8 @@ list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const string &codigoIATAPartida, c
 
 Graph::Graph(Hash<Aeropuerto *> *aeropuertos) {
     this->aeropuertos = aeropuertos;
+}
+
+void Graph::borrarAeropuerto(const string &codigoIATA){
+    this->aeropuertos->borrar(codigoIATA);
 }

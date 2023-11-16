@@ -29,14 +29,14 @@ public:
         this->siguiente = NULL;
     }
 
-    ~NodoH() {
-        NodoH *inicio = this;
-        while (inicio != NULL) {
-            NodoH *actual = inicio;
-            inicio = inicio->siguiente;
-            delete actual;
-        }
-    }
+//    ~NodoH() {
+//        NodoH *inicio = this;
+//        while (inicio != NULL) {
+//            NodoH *actual = inicio;
+//            inicio = inicio->siguiente;
+//            delete actual;
+//        }
+//    }
 };
 
 template<typename T>
@@ -80,7 +80,46 @@ public:
                 return nodo->valor;
             nodo = nodo->siguiente;
         }
-        return T();
+        return {};
+    }
+
+    // Quiero borrar 2
+    // [1 -> 2 -> 3]
+    // [2]
+    // [2, 3, 4]
+    // [1 -> 3 -> 2]
+    bool borrar(string clave) {
+        cout << "Clave a borrar = " << clave << endl;
+        int clase = this->funcionHash(clave);
+        cout << "Clase = " << clase << endl;
+        NodoH<T> *nodo = this->lista[clase];
+        while (nodo != NULL) {
+            cout << "Nodo = " << nodo->clave << endl;
+            // El nodo/aeropuerto a borrar es el primero
+            if (nodo->clave == clave) {
+//                cout << "Caso 1 Nodo = " << nodo->clave << endl;
+                this->lista[clase] = nodo->siguiente;
+                // Borra el aeropuerto
+                delete nodo->valor;
+                // Borra el nodo
+                delete nodo;
+                cout << "Borrado = " << clave << endl;
+                return true;
+            //  El nodo/aeropuerto a borrar esta despues del primero
+            } else if (nodo->siguiente != NULL && nodo->siguiente->clave == clave) {
+//                cout << "Caso 2 Nodo = " << nodo->clave << endl;
+                Aeropuerto *pAeropuertoABorrar = nodo->siguiente->valor;
+                NodoH<T> *pNodoABorrar = nodo->siguiente;
+                nodo->siguiente = nodo->siguiente->siguiente;
+                delete pAeropuertoABorrar;
+                delete pNodoABorrar;
+                cout << "Borrado = " << clave << endl;
+                return true;
+            }
+            nodo = nodo->siguiente;
+        }
+
+        return false;
     }
 
     list<T> listar() {
