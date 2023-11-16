@@ -133,9 +133,15 @@ void Controlador::baja() {
         cout << "" << endl;
 
         // TODO: Aca se manda el codigo IATA al manejador de aeropuertos para que devuelva el aeropuerto.
-        grafo->borrarAeropuerto(iata);
+        bool borrado = grafo->borrarAeropuerto(iata);
         aguardar();
-        // Si pone que Si se da de baja
+        if (borrado) {
+            generarEspacio();
+            cout << "******************* Aeropuerto " << iata <<" borrado con exito ******************" << endl;
+        } else {
+            cout << "No se ha encontrado ningun aeropuerto con el código ingresado." << "" << endl;
+        }
+        continuarOpciones();
     }
     catch (int n) {
         cargaDatosError();

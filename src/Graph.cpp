@@ -127,6 +127,6 @@ Graph::Graph(Hash<Aeropuerto *> *aeropuertos) {
     this->aeropuertos = aeropuertos;
 }
 
-void Graph::borrarAeropuerto(const string &codigoIATA){
-    this->aeropuertos->borrar(codigoIATA);
+bool Graph::borrarAeropuerto(const string &codigoIATA){
+    return this->aeropuertos->borrar(codigoIATA);
 }
