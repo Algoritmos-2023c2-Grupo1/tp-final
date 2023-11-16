@@ -10,6 +10,11 @@ class Graph {
 private:
     Hash<Aeropuerto *> *aeropuertos;
 
+    list<Vuelo> buscarRutaOptima(const std::string &codigoIATAPartida, const std::string &codigoIATADestino,
+                                 std::unordered_map<Aeropuerto *, float> &costosDesdeOrigen,
+                                 std::unordered_map<Aeropuerto *, Vuelo> &vuelosPrevios,
+                                 std::function<float(float, float)> costoCalculador);
+
 public:
     Graph(Hash<Aeropuerto *> *aeropuertos);
 
