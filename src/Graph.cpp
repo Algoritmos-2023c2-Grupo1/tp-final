@@ -126,3 +126,7 @@ std::list<Vuelo> Graph::buscarRutaMasCortaEnTiempo(const std::string &codigoIATA
 Graph::Graph(Hash<Aeropuerto *> *aeropuertos) {
     this->aeropuertos = aeropuertos;
 }
+
+bool Graph::borrarAeropuerto(const string &codigoIATA){
+    return this->aeropuertos->borrar(codigoIATA);
+}

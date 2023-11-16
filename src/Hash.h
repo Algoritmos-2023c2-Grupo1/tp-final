@@ -28,15 +28,6 @@ public:
         this->valor = obj.valor;
         this->siguiente = NULL;
     }
-
-    ~NodoH() {
-        NodoH *inicio = this;
-        while (inicio != NULL) {
-            NodoH *actual = inicio;
-            inicio = inicio->siguiente;
-            delete actual;
-        }
-    }
 };
 
 template<typename T>
@@ -80,7 +71,34 @@ public:
                 return nodo->valor;
             nodo = nodo->siguiente;
         }
-        return T();
+        return {};
+    }
+
+    bool borrar(string clave) {
+        int clase = this->funcionHash(clave);
+        NodoH<T> *nodo = this->lista[clase];
+        while (nodo != NULL) {
+            // El nodo/aeropuerto a borrar es el primero
+            if (nodo->clave == clave) {
+                this->lista[clase] = nodo->siguiente;
+                // Borra el aeropuerto
+                delete nodo->valor;
+                // Borra el nodo
+                delete nodo;
+                return true;
+            //  El nodo/aeropuerto a borrar esta despues del primero
+            } else if (nodo->siguiente != NULL && nodo->siguiente->clave == clave) {
+                Aeropuerto *pAeropuertoABorrar = nodo->siguiente->valor;
+                NodoH<T> *pNodoABorrar = nodo->siguiente;
+                nodo->siguiente = nodo->siguiente->siguiente;
+                delete pAeropuertoABorrar;
+                delete pNodoABorrar;
+                return true;
+            }
+            nodo = nodo->siguiente;
+        }
+
+        return false;
     }
 
     list<T> listar() {

@@ -20,6 +20,8 @@ public:
 
     void addAeropuerto(Aeropuerto *aeropuerto);
 
+    bool borrarAeropuerto(const string &codigoIATA);
+
     list<Aeropuerto *> getAeropuertos();
 
     string toString();
