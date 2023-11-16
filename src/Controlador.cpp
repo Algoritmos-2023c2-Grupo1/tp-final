@@ -24,9 +24,6 @@ void Controlador::continuarOpciones() {
     generarEspacio();
     cout << "**************************** SIGAMOS TRABAJANDO *****************************" << endl;
     cout << "*****************************************************************************" << endl;
-    for (Aeropuerto *aeropuerto:this->grafo->getAeropuertos()) {
-        cout << aeropuerto->getCodigoIATA() << " ,";
-    }
     cout << endl;
 }
 
